@@ -2,9 +2,9 @@
 Databases Week 2 Applied
 week2_student.sql
 
-student id:
-student name:
-last modified date:
+student id:33049246
+student name:Xiaowen Zhou
+last modified date: 3/8/2023
 
 */
 
