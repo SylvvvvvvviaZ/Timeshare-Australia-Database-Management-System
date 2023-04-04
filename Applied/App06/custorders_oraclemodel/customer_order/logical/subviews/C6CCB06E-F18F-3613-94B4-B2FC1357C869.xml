@@ -6,7 +6,7 @@
 <autoRoute>false</autoRoute>
 <boxInbox>false</boxInbox>
 <showLegend>false</showLegend>
-<showLabels>false</showLabels>
+<showLabels>true</showLabels>
 <showRelAttributes>false</showRelAttributes>
 <gridEnabled>false</gridEnabled>
 <showGrid>false</showGrid>
@@ -16,11 +16,11 @@
 <objectViews>
 <OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="524BB519-8F0C-9119-1590-D29692FA6E65" otype="Entity" vid="954ECAAE-0E2F-F1D2-C79F-AF21C11665A3">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
-<bounds x="647" y="120" width="170" height="110"/>
+<bounds x="462" y="80" width="170" height="110"/>
 </OView>
 <OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="8699D3DB-14AA-0BC6-0994-1FFF14E1F831" otype="Entity" vid="4098167C-EE33-E82B-3246-6F24121C3B4C">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
-<bounds x="309" y="125" width="201" height="110"/>
+<bounds x="124" y="85" width="201" height="110"/>
 </OView>
 </objectViews>
 <connectors>
@@ -29,8 +29,8 @@
 <backgroundColor>-16777216</backgroundColor>
 <lineWidth>1</lineWidth>
 <points>
-<point x="510" y="177"/>
-<point x="647" y="177"/>
+<point x="325" y="137"/>
+<point x="462" y="137"/>
 </points>
 </Connector>
 </connectors>

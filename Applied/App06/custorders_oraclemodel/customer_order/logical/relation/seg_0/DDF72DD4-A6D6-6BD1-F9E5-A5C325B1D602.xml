@@ -17,4 +17,18 @@
 <targetEntity>524BB519-8F0C-9119-1590-D29692FA6E65</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<attribute name="Attribute_1" id="1AAB90D8-74EC-7106-8100-4D2733C18159">
+<createdBy>a726928</createdBy>
+<createdTime>2023-04-04 22:55:07 UTC</createdTime>
+<ownerDesignName>customer_order</ownerDesignName>
+<engineerTo>
+<item key="5739534F-55B9-A6F9-5DB5-D8A8179087BB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</attribute>
+</attributes>
 </Relation>
