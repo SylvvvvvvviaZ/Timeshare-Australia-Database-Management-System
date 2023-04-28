@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9A70065D-41E7-62A1-AED9-B4A2E2B4EB4C" name="CUSTOMER">
+<createdBy>a726928</createdBy>
+<createdTime>2023-04-28 23:40:34 UTC</createdTime>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="cust_no" id="608E0B7F-66BE-68A8-71DA-8240EEC9C3B8">
+<createdBy>a726928</createdBy>
+<createdTime>2023-04-28 23:41:17 UTC</createdTime>
+<commentInRDBMS><![CDATA[customer number]]></commentInRDBMS>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cust_name" id="4B614063-A46D-792B-9CAF-A0AFDB238913">
+<createdBy>a726928</createdBy>
+<createdTime>2023-04-28 23:41:56 UTC</createdTime>
+<commentInRDBMS><![CDATA[customer name]]></commentInRDBMS>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cust_address" id="9A00D581-5850-8949-DF9D-E3A7478A3251">
+<createdBy>a726928</createdBy>
+<createdTime>2023-04-28 23:42:39 UTC</createdTime>
+<commentInRDBMS><![CDATA[customer address]]></commentInRDBMS>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cust_phone" id="081064DB-0513-CF21-CA74-BAE05E180605">
+<createdBy>a726928</createdBy>
+<createdTime>2023-04-28 23:43:34 UTC</createdTime>
+<commentInRDBMS><![CDATA[customer phone]]></commentInRDBMS>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="14AFEABE-8012-A457-3FD1-E323E1BCEE84" name="CUSTOMER PK">
+<createdBy>a726928</createdBy>
+<createdTime>2023-04-28 23:41:32 UTC</createdTime>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>608E0B7F-66BE-68A8-71DA-8240EEC9C3B8</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
