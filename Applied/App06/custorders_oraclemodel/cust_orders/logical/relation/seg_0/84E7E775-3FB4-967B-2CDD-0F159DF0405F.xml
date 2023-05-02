@@ -7,7 +7,7 @@
 <item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
 </engineerTo>
 <targetPk>4669B6B1-2BF7-6C59-907D-30607959EF0A</targetPk>
-<identifying>false</identifying>
+<identifying>true</identifying>
 <nameOnSource>includes</nameOnSource>
 <nameOnTarget> </nameOnTarget>
 <optionalSource>false</optionalSource>

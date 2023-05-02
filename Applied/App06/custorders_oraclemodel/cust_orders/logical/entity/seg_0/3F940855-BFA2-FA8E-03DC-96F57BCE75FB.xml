@@ -45,7 +45,34 @@
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ol_qtyordered" id="B90A7256-33C1-CA16-B025-CA9C79032946">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-02 12:39:36 UTC</createdTime>
+<commentInRDBMS><![CDATA[ol_qtyordered]]></commentInRDBMS>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ol_lineprice" id="EFBA00F8-381F-2C98-A1EC-8BF0B1301471">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-02 12:40:10 UTC</createdTime>
+<commentInRDBMS><![CDATA[ol lineprice]]></commentInRDBMS>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -57,6 +84,10 @@
 <item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
 </engineerTo>
 <pk>true</pk>
+<usedAttributes>
+<attributeRef>D8C9D9FB-A1A3-E329-D813-3821DA591A9E</attributeRef>
+<attributeRef>54DE07D7-C39E-BD16-2882-4107649BCEC3</attributeRef>
+</usedAttributes>
 </identifier>
 </identifiers>
 </Entity>

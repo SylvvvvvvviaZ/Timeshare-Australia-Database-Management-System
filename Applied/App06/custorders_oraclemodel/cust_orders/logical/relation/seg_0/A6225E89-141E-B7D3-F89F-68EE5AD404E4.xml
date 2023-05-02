@@ -7,7 +7,7 @@
 <item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
 </engineerTo>
 <sourcePk>67AB2CE9-72F9-E7EA-2722-38CF341D8A6F</sourcePk>
-<identifying>false</identifying>
+<identifying>true</identifying>
 <nameOnSource>is_used_in</nameOnSource>
 <nameOnTarget> </nameOnTarget>
 <optionalSource>true</optionalSource>

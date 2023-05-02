@@ -56,6 +56,22 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="pact_id" id="2D24A2D9-A57D-529D-F527-055C742B458B">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-02 12:46:05 UTC</createdTime>
+<commentInRDBMS><![CDATA[pact id]]></commentInRDBMS>
+<generatorID>6D858A8F-200F-B74C-6132-C4DE63E284A5</generatorID>
+<ownerDesignName>cust_orders</ownerDesignName>
+<engineerTo>
+<item key="B8067232-404F-42FD-34D7-82161CE4846E" value="true"/>
+</engineerTo>
+<referedAttribute>908591AE-49EA-6C47-7E57-31119CC9FC87</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="67AB2CE9-72F9-E7EA-2722-38CF341D8A6F" name="PRODUCT PK">
