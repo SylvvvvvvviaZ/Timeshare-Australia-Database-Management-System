@@ -70,6 +70,70 @@
 <dataTypePrecision>7</dataTypePrecision>
 <ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="prop_no" id="822FDF19-D1F8-9C78-C859-C07FEC0A3E8C">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:08:57 UTC</createdTime>
+<commentInRDBMS><![CDATA[prop numver]]></commentInRDBMS>
+<generatorID>4B31C869-FD59-ACF0-62AD-215B81F2E395</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<referedAttribute>0D4C9C1B-69BA-6312-34F3-4B6B00D6A8B2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="owner_ no" id="F9C99154-9675-2CD8-B18F-43547BCB9AD4">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:08:57 UTC</createdTime>
+<commentInRDBMS><![CDATA[owner  no]]></commentInRDBMS>
+<generatorID>4B31C869-FD59-ACF0-62AD-215B81F2E395</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<referedAttribute>17BFBF16-FB15-078F-10CC-2945987761CC</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="dam_date" id="A9793745-9346-47AC-5B71-45ED8E194A8A">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:12:44 UTC</createdTime>
+<commentInRDBMS><![CDATA[dam date]]></commentInRDBMS>
+<generatorID>D40E6467-DE68-54CD-68C8-F0E56C108EDE</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>7E2A20A9-8322-9FD4-EEAF-D5E2528B7F6F</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="dam_time" id="0E4A1CB9-654A-5DB7-35D4-EFF171722010">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:12:44 UTC</createdTime>
+<commentInRDBMS><![CDATA[dam time]]></commentInRDBMS>
+<generatorID>D40E6467-DE68-54CD-68C8-F0E56C108EDE</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>199AF8BF-ACD9-52E1-8039-E36DA1E58447</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="CD0D7933-FB34-6EE4-AADA-596E25A208AD" name="PAYMENT PK">

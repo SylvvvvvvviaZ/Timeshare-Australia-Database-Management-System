@@ -57,6 +57,54 @@
 <dataTypePrecision>7</dataTypePrecision>
 <ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="prop_no" id="A675A639-9AE3-886D-DA11-0F9674C7B9BC">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:06:45 UTC</createdTime>
+<commentInRDBMS><![CDATA[prop numver]]></commentInRDBMS>
+<generatorID>B86D89B7-A61D-DE77-2233-8FC960E7A095</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<referedAttribute>0D4C9C1B-69BA-6312-34F3-4B6B00D6A8B2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="owner_ no" id="A213963E-7B5C-A4B9-242C-31A657B5B295">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:06:45 UTC</createdTime>
+<commentInRDBMS><![CDATA[owner  no]]></commentInRDBMS>
+<generatorID>B86D89B7-A61D-DE77-2233-8FC960E7A095</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<referedAttribute>17BFBF16-FB15-078F-10CC-2945987761CC</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tenant_no" id="BD8D89E8-B346-F1C8-32EF-956E24B72ADB">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:09:49 UTC</createdTime>
+<commentInRDBMS><![CDATA[tenant no]]></commentInRDBMS>
+<generatorID>016C439A-EB49-42CF-2070-DFABBA035617</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<referedAttribute>7B1B4A9B-75E8-BC6B-927C-22EBF6D861B8</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="6FADA502-BE10-25CB-2100-C9B49D1265B7" name="RENT PK">
