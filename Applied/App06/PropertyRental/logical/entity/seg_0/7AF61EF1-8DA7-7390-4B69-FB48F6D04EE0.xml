@@ -69,6 +69,38 @@
 <dataTypePrecision>7</dataTypePrecision>
 <ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="prop_no" id="2B8E2310-BC0D-EB1D-0796-66727CB03B05">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:07:43 UTC</createdTime>
+<commentInRDBMS><![CDATA[prop numver]]></commentInRDBMS>
+<generatorID>492F80D7-6DD3-EBDD-EB3A-A079C9119379</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<referedAttribute>0D4C9C1B-69BA-6312-34F3-4B6B00D6A8B2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="owner_ no" id="6FAD9383-6BE7-8C72-3730-A2E3F7B9D13E">
+<createdBy>a726928</createdBy>
+<createdTime>2023-05-03 02:07:43 UTC</createdTime>
+<commentInRDBMS><![CDATA[owner  no]]></commentInRDBMS>
+<generatorID>492F80D7-6DD3-EBDD-EB3A-A079C9119379</generatorID>
+<ownerDesignName>PropertyRental</ownerDesignName>
+<engineerTo>
+<item key="8D4383D0-42FD-D80A-583E-C388979DBE10" value="true"/>
+</engineerTo>
+<referedAttribute>17BFBF16-FB15-078F-10CC-2945987761CC</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="9788BA3D-04BF-90C5-2C9C-08F55D88937C" name="DAMAGE PK">
