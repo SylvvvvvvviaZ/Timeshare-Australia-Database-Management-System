@@ -1,0 +1,134 @@
+SQL> 
+SQL> -- 1. Changing a tables structure
+SQL> 
+SQL> ALTER TABLE unit ADD (
+  2      unit_credit_points NUMBER(2, 0) DEFAULT 6 NOT NULL,
+  3      constraint chk_unitcreditpoints check (unit_credit_points in (3,6,12))
+  4  );
+
+Error starting at line : 14 in command -
+ALTER TABLE unit ADD (
+    unit_credit_points NUMBER(2, 0) DEFAULT 6 NOT NULL,
+    constraint chk_unitcreditpoints check (unit_credit_points in (3,6,12))
+)
+Error report -
+ORA-01430: column being added already exists in table
+01430. 00000 -  "column being added already exists in table"
+*Cause:    
+*Action:
+SQL> 
+SQL> COMMENT ON COLUMN unit.unit_credit_points IS
+  2      'Unit credit points';
+
+Comment created.
+
+SQL> 
+SQL> DESC unit;
+Name               Null?    Type         
+------------------ -------- ------------ 
+UNIT_CODE          NOT NULL CHAR(7)      
+UNIT_NAME                   VARCHAR2(50) 
+UNIT_CREDIT_POINTS NOT NULL NUMBER(2)    
+SQL> 
+SQL> -- 2. Changing a database structure
+SQL> -- drop table statements
+SQL> DROP TABLE course CASCADE CONSTRAINTS PURGE;
+
+Table COURSE dropped.
+
+SQL> 
+SQL> DROP TABLE course_unit CASCADE CONSTRAINTS PURGE;
+
+Table COURSE_UNIT dropped.
+
+SQL> 
+SQL> -- adding COURSE table
+SQL> CREATE TABLE course (
+  2      course_code        CHAR(5) NOT NULL,
+  3      course_name        VARCHAR2(30) NOT NULL,
+  4      course_totalpoints NUMBER(3) NOT NULL
+  5  );
+
+Table COURSE created.
+
+SQL> 
+SQL> COMMENT ON COLUMN course.course_code IS
+  2      'Course code';
+
+Comment created.
+
+SQL> 
+SQL> COMMENT ON COLUMN course.course_name IS
+  2      'Course name';
+
+Comment created.
+
+SQL> 
+SQL> COMMENT ON COLUMN course.course_totalpoints IS
+  2      'Course total credit points';
+
+Comment created.
+
+SQL> 
+SQL> ALTER TABLE course ADD CONSTRAINT course_pk PRIMARY KEY ( course_code );
+
+Table COURSE altered.
+
+SQL> 
+SQL> -- adding COURSE_UNIT table
+SQL> 
+SQL> CREATE TABLE course_unit (
+  2      course_code CHAR(5) NOT NULL,
+  3      unit_code   CHAR(7) NOT NULL
+  4  );
+
+Table COURSE_UNIT created.
+
+SQL> 
+SQL> COMMENT ON COLUMN course_unit.course_code IS
+  2      'Course code';
+
+Comment created.
+
+SQL> 
+SQL> COMMENT ON COLUMN course_unit.unit_code IS
+  2      'Unit code';
+
+Comment created.
+
+SQL> 
+SQL> ALTER TABLE course_unit ADD CONSTRAINT course_unit_pk PRIMARY KEY ( course_code,
+  2                                                                      unit_code );
+
+Table COURSE_UNIT altered.
+
+SQL> 
+SQL> -- adding FKs
+SQL> 
+SQL> ALTER TABLE course_unit
+  2      ADD CONSTRAINT course_courseunit_fk FOREIGN KEY ( course_code )
+  3          REFERENCES course ( course_code );
+
+Table COURSE_UNIT altered.
+
+SQL> 
+SQL> ALTER TABLE course_unit
+  2      ADD CONSTRAINT unit_courseunit_fk FOREIGN KEY ( unit_code )
+  3          REFERENCES unit ( unit_code );
+
+Table COURSE_UNIT altered.
+
+SQL> 
+SQL> DESC course;
+Name               Null?    Type         
+------------------ -------- ------------ 
+COURSE_CODE        NOT NULL CHAR(5)      
+COURSE_NAME        NOT NULL VARCHAR2(30) 
+COURSE_TOTALPOINTS NOT NULL NUMBER(3)    
+SQL> DESC course_unit;
+Name        Null?    Type    
+----------- -------- ------- 
+COURSE_CODE NOT NULL CHAR(5) 
+UNIT_CODE   NOT NULL CHAR(7) 
+SQL> 
+SQL> spool off

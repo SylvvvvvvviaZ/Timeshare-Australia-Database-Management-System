@@ -1,20 +1,20 @@
 SQL> --
 SQL> -- Place DROP commands at head of schema file
 SQL> --
-SQL> drop table enrolment purge;
+SQL> DROP TABLE enrolment CASCADE CONSTRAINTS PURGE;
 
 Table ENROLMENT dropped.
 
-SQL> drop table unit purge;
-
-Table UNIT dropped.
-
-SQL> drop table student purge;
+SQL> 
+SQL> DROP TABLE student CASCADE CONSTRAINTS PURGE;
 
 Table STUDENT dropped.
 
 SQL> 
-SQL> 
+SQL> DROP TABLE unit CASCADE CONSTRAINTS PURGE;
+
+Table UNIT dropped.
+
 SQL> -- Create Tables
 SQL> -- Here using both table and column constraints
 SQL> --
@@ -154,24 +154,27 @@ Table ENROLMENT altered.
 
 SQL> 
 SQL> ALTER TABLE enrolment
-  2      ADD CONSTRAINT enrolment_student_pk FOREIGN KEY ( stu_nbr )
+  2      ADD CONSTRAINT student_enrolment_fk FOREIGN KEY ( stu_nbr )
   3          REFERENCES student ( stu_nbr );
 
 Table ENROLMENT altered.
 
 SQL> 
 SQL> ALTER TABLE enrolment
-  2      ADD CONSTRAINT enrolment_unit_pk FOREIGN KEY ( unit_code )
+  2      ADD CONSTRAINT unit_enrolment_fk FOREIGN KEY ( unit_code )
   3          REFERENCES unit ( unit_code );
 
 Table ENROLMENT altered.
 
 SQL> 
 SQL> ALTER TABLE enrolment
-  2      ADD CONSTRAINT enrolment_sems_check CHECK ( enrol_semester IN ( '1', '2', '3' ) )
-  3      ;
+  2      ADD CONSTRAINT ck_enrol_sem CHECK ( enrol_semester IN (
+  3          '1',
+  4          '2',
+  5          '3'
+  6      ) );
 
 Table ENROLMENT altered.
 
 SQL> 
-SQL> spool off
+SQL> SPOOL OFF

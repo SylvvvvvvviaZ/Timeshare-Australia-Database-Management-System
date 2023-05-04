@@ -5,6 +5,10 @@ week7_alter.sql
 Author: Xiaowen Zhou
 
 */
+
+set echo on
+spool week7_alter_output.txt
+
 -- 1. Changing a tables structure
 
 ALTER TABLE unit ADD (
