@@ -21,47 +21,49 @@ CREATE TABLE policy (
     policy_startdate DATE NOT NULL,
     policy_type_code CHAR(1) NOT NULL,
     policy_length    NUMBER(3) NOT NULL,
-    insurer_code     CHAR(3) NOT NULL,
+    insurer_code     CHAR(3) NOT NULL
 );
+
 COMMENT ON COLUMN policy.policy_id IS
     'Policy unique identifier';
 
 COMMENT ON COLUMN policy.prop_no IS
-    'Property unique identifierr';
+    'Property unique identifier';
 
 COMMENT ON COLUMN policy.policy_startdate IS
     'Policy start date';
 
 COMMENT ON COLUMN policy.policy_type_code IS
-    'Address of property owner';
+    'Policy type code';
 
 COMMENT ON COLUMN policy.policy_length IS
-    'Length of the policy in months (minimum 6 months long)';
+    'Length of policy in months (minimum 6 months)';
 
 COMMENT ON COLUMN policy.insurer_code IS
-    'Insurance company unique identifier';
+    'Insurance company code';
 
 /*Task 1: Add FK constraints*/
 
 ALTER TABLE policy ADD CONSTRAINT policy_pk PRIMARY KEY ( policy_id );
 
-ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( prop_no );
+ALTER TABLE policy ADD CONSTRAINT policy_no_uq UNIQUE ( prop_no );
 
 ALTER TABLE policy
-    ADD CONSTRAINT property_policy FOREIGN KEY ( prop_no )
-        REFERENCES owner ( prop_no );
+    ADD CONSTRAINT property_policy FOREIGN KEY (prop_no)
+        REFERENCES policy(prop_no);
+        
+ALTER TABLE policy ADD CONSTRAINT policy_startdate_uq UNIQUE ( policy_startdate );
 
-ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( policy_startdate );
-
-ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( policy_type_code );
+ALTER TABLE policy ADD CONSTRAINT policy_type_code_uq UNIQUE ( policy_type_code );
 
 ALTER TABLE policy
     ADD CONSTRAINT property_type_policy FOREIGN KEY ( policy_type_code )
-        REFERENCES owner ( policy_type_code );
+        REFERENCES policy( policy_type_code );
 
 ALTER TABLE policy
     ADD CONSTRAINT insurer_policy FOREIGN KEY ( insurer_code )
-        REFERENCES owner ( insurer_code );
+        REFERENCES policy ( insurer_code );
+
 
 
 /*Task 2*/
@@ -77,17 +79,24 @@ ALTER TABLE policy
         policy_length,
         insurer_code
     ) VALUES (
-        policy_id_seq.NEXTVAL,
+        1,
         7145,
-        '2023-04-21',
+         '21-APR-23',
         'B',
         12,
         'LW'
-    ),
-(
-    policy_id_seq.NEXTVAL,
+    );
+INSERT INTO policy (
+    policy_id,
+    prop_no,
+    policy_startdate,
+    policy_type_code,
+    policy_length,
+    insurer_code
+) VALUES (
+    2,
     9346,
-    '2023-04-21',
+    '21-APR-23',
     'B',
     12,
     'LW'
@@ -109,9 +118,9 @@ INSERT
         policy_length,
         insurer_code
     )
-VALUES (policy_id_seq.NEXTVAL,
+VALUES (3,
            7145,
-           '2023-05-01',
+           '01-MAY-23',
            'B',
            12,
            'LW');
