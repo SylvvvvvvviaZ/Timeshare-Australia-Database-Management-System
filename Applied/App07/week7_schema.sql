@@ -14,11 +14,11 @@ spool week7_schema_output.txt
 --
 -- Place DROP commands at head of schema file
 --
-drop table enrolment purge;
-drop table unit purge;
-drop table student purge;
+DROP TABLE enrolment CASCADE CONSTRAINTS PURGE;
 
+DROP TABLE student CASCADE CONSTRAINTS PURGE;
 
+DROP TABLE unit CASCADE CONSTRAINTS PURGE;
 -- Create Tables
 -- Here using both table and column constraints
 --
@@ -98,16 +98,20 @@ ALTER TABLE enrolment
                                               enrol_semester );
 
 ALTER TABLE enrolment
-    ADD CONSTRAINT enrolment_student_pk FOREIGN KEY ( stu_nbr )
+    ADD CONSTRAINT student_enrolment_fk FOREIGN KEY ( stu_nbr )
         REFERENCES student ( stu_nbr );
 
 ALTER TABLE enrolment
-    ADD CONSTRAINT enrolment_unit_pk FOREIGN KEY ( unit_code )
+    ADD CONSTRAINT unit_enrolment_fk FOREIGN KEY ( unit_code )
         REFERENCES unit ( unit_code );
 
 ALTER TABLE enrolment
-    ADD CONSTRAINT enrolment_sems_check CHECK ( enrol_semester IN ( '1', '2', '3' ) )
-    ;
-    
-spool off
-set echo off
+    ADD CONSTRAINT ck_enrol_sem CHECK ( enrol_semester IN (
+        '1',
+        '2',
+        '3'
+    ) );
+
+SPOOL OFF
+
+SET ECHO OFF
