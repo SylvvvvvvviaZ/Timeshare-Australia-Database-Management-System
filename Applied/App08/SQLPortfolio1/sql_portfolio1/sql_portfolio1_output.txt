@@ -1,0 +1,372 @@
+SQL> 
+SQL> --****PLEASE ENTER YOUR DETAILS BELOW****
+SQL> --sql_portfolio1.sql
+SQL> 
+SQL> --Student ID:33049246
+SQL> --Student Name:XiaowenZhou
+SQL> --Unit Code:FIT2094
+SQL> --Applied Class No: Applied 01, Melbourne Wed 18:00
+SQL> 
+SQL> --set echo on
+SQL> --spool week7_schema_output.txt
+SQL> 
+SQL> /*Task 1: CREATE table POLICY and non FK constraints*/
+SQL> 
+SQL> CREATE TABLE policy (
+  2      policy_id        NUMBER(7) NOT NULL,
+  3      prop_no          NUMBER(4) NOT NULL,
+  4      policy_startdate DATE NOT NULL,
+  5      policy_type_code CHAR(1) NOT NULL,
+  6      policy_length    NUMBER(3) NOT NULL,
+  7      insurer_code     CHAR(3) NOT NULL,
+  8  );
+
+Error starting at line : 18 in command -
+CREATE TABLE policy (
+    policy_id        NUMBER(7) NOT NULL,
+    prop_no          NUMBER(4) NOT NULL,
+    policy_startdate DATE NOT NULL,
+    policy_type_code CHAR(1) NOT NULL,
+    policy_length    NUMBER(3) NOT NULL,
+    insurer_code     CHAR(3) NOT NULL,
+)
+Error report -
+ORA-00904: : invalid identifier
+00904. 00000 -  "%s: invalid identifier"
+*Cause:    
+*Action:
+SQL> COMMENT ON COLUMN policy.policy_id IS
+  2      'Policy unique identifier';
+
+Error starting at line : 26 in command -
+COMMENT ON COLUMN policy.policy_id IS
+    'Policy unique identifier'
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> COMMENT ON COLUMN policy.prop_no IS
+  2      'Property unique identifierr';
+
+Error starting at line : 29 in command -
+COMMENT ON COLUMN policy.prop_no IS
+    'Property unique identifierr'
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> COMMENT ON COLUMN policy.policy_startdate IS
+  2      'Policy start date';
+
+Error starting at line : 32 in command -
+COMMENT ON COLUMN policy.policy_startdate IS
+    'Policy start date'
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> COMMENT ON COLUMN policy.policy_type_code IS
+  2      'Address of property owner';
+
+Error starting at line : 35 in command -
+COMMENT ON COLUMN policy.policy_type_code IS
+    'Address of property owner'
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> COMMENT ON COLUMN policy.policy_length IS
+  2      'Length of the policy in months (minimum 6 months long)';
+
+Error starting at line : 38 in command -
+COMMENT ON COLUMN policy.policy_length IS
+    'Length of the policy in months (minimum 6 months long)'
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> COMMENT ON COLUMN policy.insurer_code IS
+  2      'Insurance company unique identifier';
+
+Error starting at line : 41 in command -
+COMMENT ON COLUMN policy.insurer_code IS
+    'Insurance company unique identifier'
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Task 1: Add FK constraints*/
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_pk PRIMARY KEY ( policy_id );
+
+Error starting at line : 46 in command -
+ALTER TABLE policy ADD CONSTRAINT policy_pk PRIMARY KEY ( policy_id )
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( prop_no );
+
+Error starting at line : 48 in command -
+ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( prop_no )
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> ALTER TABLE policy
+  2      ADD CONSTRAINT property_policy FOREIGN KEY ( prop_no )
+  3          REFERENCES owner ( prop_no );
+
+Error starting at line : 50 in command -
+ALTER TABLE policy
+    ADD CONSTRAINT property_policy FOREIGN KEY ( prop_no )
+        REFERENCES owner ( prop_no )
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( policy_startdate );
+
+Error starting at line : 54 in command -
+ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( policy_startdate )
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( policy_type_code );
+
+Error starting at line : 56 in command -
+ALTER TABLE policy ADD CONSTRAINT policy_uq UNIQUE ( policy_type_code )
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> ALTER TABLE policy
+  2      ADD CONSTRAINT property_type_policy FOREIGN KEY ( policy_type_code )
+  3          REFERENCES owner ( policy_type_code );
+
+Error starting at line : 58 in command -
+ALTER TABLE policy
+    ADD CONSTRAINT property_type_policy FOREIGN KEY ( policy_type_code )
+        REFERENCES owner ( policy_type_code )
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> ALTER TABLE policy
+  2      ADD CONSTRAINT insurer_policy FOREIGN KEY ( insurer_code )
+  3          REFERENCES owner ( insurer_code );
+
+Error starting at line : 62 in command -
+ALTER TABLE policy
+    ADD CONSTRAINT insurer_policy FOREIGN KEY ( insurer_code )
+        REFERENCES owner ( insurer_code )
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> 
+SQL> /*Task 2*/
+SQL> 
+SQL> --The policy_type_code 'B' indicates that this is a building insurance policy.       
+SQL> --The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
+SQL> 
+SQL>     INSERT INTO policy (
+  2          policy_id,
+  3          prop_no,
+  4          policy_startdate,
+  5          policy_type_code,
+  6          policy_length,
+  7          insurer_code
+  8      ) VALUES (
+  9          policy_id_seq.NEXTVAL,
+ 10          7145,
+ 11          '2023-04-21',
+ 12          'B',
+ 13          12,
+ 14          'LW'
+ 15      ),
+ 16  (
+ 17      policy_id_seq.NEXTVAL,
+ 18      9346,
+ 19      '2023-04-21',
+ 20      'B',
+ 21      12,
+ 22      'LW'
+ 23  );
+
+Error starting at line : 72 in command -
+    INSERT INTO policy (
+        policy_id,
+        prop_no,
+        policy_startdate,
+        policy_type_code,
+        policy_length,
+        insurer_code
+    ) VALUES (
+        policy_id_seq.NEXTVAL,
+        7145,
+        '2023-04-21',
+        'B',
+        12,
+        'LW'
+    ),
+(
+    policy_id_seq.NEXTVAL,
+    9346,
+    '2023-04-21',
+    'B',
+    12,
+    'LW'
+)
+Error at Command Line : 86 Column : 6
+Error report -
+SQL Error: ORA-00933: SQL command not properly ended
+00933. 00000 -  "SQL command not properly ended"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Task 3*/
+SQL> 
+SQL> -- Update the policy record for property number 7145
+SQL> 
+SQL> UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
+
+Error starting at line : 100 in command -
+UPDATE policy SET policy_length = 18 WHERE prop_no = 7145
+Error at Command Line : 100 Column : 8
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> -- Insert a new policy record
+SQL> INSERT
+  2      INTO policy (
+  3          policy_id,
+  4          prop_no,
+  5          policy_startdate,
+  6          policy_type_code,
+  7          policy_length,
+  8          insurer_code
+  9      )
+ 10  VALUES (policy_id_seq.NEXTVAL,
+ 11             7145,
+ 12             '2023-05-01',
+ 13             'B',
+ 14             12,
+ 15             'LW');
+
+Error starting at line : 103 in command -
+INSERT
+    INTO policy (
+        policy_id,
+        prop_no,
+        policy_startdate,
+        policy_type_code,
+        policy_length,
+        insurer_code
+    )
+VALUES (policy_id_seq.NEXTVAL,
+           7145,
+           '2023-05-01',
+           'B',
+           12,
+           'LW')
+Error at Command Line : 104 Column : 10
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> 
+SQL> /*Task 4*/
+SQL> 
+SQL> DELETE FROM policy
+  2  WHERE
+  3          prop_no = 7145
+  4      AND policy_startdate = DATE '2023-05-02'
+  5      AND policy_type_code = 'B'
+  6      AND policy_length = 6
+  7      AND insurer_code = 'LW';
+
+Error starting at line : 124 in command -
+DELETE FROM policy
+WHERE
+        prop_no = 7145
+    AND policy_startdate = DATE '2023-05-02'
+    AND policy_type_code = 'B'
+    AND policy_length = 6
+    AND insurer_code = 'LW'
+Error at Command Line : 124 Column : 13
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> DELETE FROM policy
+  2  WHERE
+  3          prop_no = 7145
+  4      AND policy_startdate = DATE '2023-05-02'
+  5      AND policy_type_code = 'B'
+  6      AND policy_length = 12
+  7      AND insurer_code = 'LW';
+
+Error starting at line : 132 in command -
+DELETE FROM policy
+WHERE
+        prop_no = 7145
+    AND policy_startdate = DATE '2023-05-02'
+    AND policy_type_code = 'B'
+    AND policy_length = 12
+    AND insurer_code = 'LW'
+Error at Command Line : 132 Column : 13
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> --Comment out SET ECHO and SPOOL commands before submitting your portfolio
+SQL> SPOOL OFF

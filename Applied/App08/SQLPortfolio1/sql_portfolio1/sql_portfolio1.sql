@@ -13,8 +13,6 @@ SPOOL sql_portfolio1_output.txt
 --set echo on
 --spool week7_schema_output.txt
 
-DROP TABLE policy CASCADE CONSTRAINTS PURGE;
-
 /*Task 1: CREATE table POLICY and non FK constraints*/
 
 CREATE TABLE policy (
@@ -23,7 +21,8 @@ CREATE TABLE policy (
     policy_startdate DATE NOT NULL,
     policy_type_code CHAR(1) NOT NULL,
     policy_length    NUMBER(3) NOT NULL,
-    insurer_code     CHAR(3) NOT NULL, );
+    insurer_code     CHAR(3) NOT NULL,
+);
 COMMENT ON COLUMN policy.policy_id IS
     'Policy unique identifier';
 
@@ -66,6 +65,10 @@ ALTER TABLE policy
 
 
 /*Task 2*/
+
+--The policy_type_code 'B' indicates that this is a building insurance policy.       
+--The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
+
     INSERT INTO policy (
         policy_id,
         prop_no,
@@ -76,7 +79,7 @@ ALTER TABLE policy
     ) VALUES (
         policy_id_seq.NEXTVAL,
         7145,
-        TO_DATE('2023-04-21', 'YYYY-MM-DD'),
+        '2023-04-21',
         'B',
         12,
         'LW'
@@ -84,19 +87,57 @@ ALTER TABLE policy
 (
     policy_id_seq.NEXTVAL,
     9346,
-    TO_DATE('2023-04-21', 'YYYY-MM-DD'),
+    '2023-04-21',
     'B',
     12,
     'LW'
 );
        
---The policy_type_code 'B' indicates that this is a building insurance policy.       
---The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
 /*Task 3*/
 
+-- Update the policy record for property number 7145
+
+UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
+
+-- Insert a new policy record
+INSERT
+    INTO policy (
+        policy_id,
+        prop_no,
+        policy_startdate,
+        policy_type_code,
+        policy_length,
+        insurer_code
+    )
+VALUES (policy_id_seq.NEXTVAL,
+           7145,
+           '2023-05-01',
+           'B',
+           12,
+           'LW');
+
+COMMIT;
 
 
 /*Task 4*/
+
+DELETE FROM policy
+WHERE
+        prop_no = 7145
+    AND policy_startdate = DATE '2023-05-02'
+    AND policy_type_code = 'B'
+    AND policy_length = 6
+    AND insurer_code = 'LW';
+
+DELETE FROM policy
+WHERE
+        prop_no = 7145
+    AND policy_startdate = DATE '2023-05-02'
+    AND policy_type_code = 'B'
+    AND policy_length = 12
+    AND insurer_code = 'LW';
+
+COMMIT;
 
 
 
