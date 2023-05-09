@@ -18,15 +18,15 @@ SPOOL sql_portfolio2_basic_output.txt
 
 SELECT 
     m.maint_id,
+    m.maint_desc,
     m.maint_cost,
-    m.maint_desc,   
     to_char(maint_datetime, 'dd-Mon-yyyy HH24:MI:SS') AS maint_date_time,
-    p.prop_address,
+    p.prop_address,   
     o.owner_givname 
     || ' ' 
     || o.owner_famname AS owner_name
 FROM
-    MAINTENANCE m
+    rent.MAINTENANCE m
     NATURAL JOIN PROPERTY p
     NATURAL JOIN OWNER o 
 WHERE

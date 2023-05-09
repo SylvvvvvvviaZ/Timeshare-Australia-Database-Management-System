@@ -15,15 +15,15 @@ SQL> -- (;) at the end of this answer
 SQL> 
 SQL> SELECT 
   2      m.maint_id,
-  3      m.maint_cost,
-  4      m.maint_desc,   
+  3      m.maint_desc,
+  4      m.maint_cost,
   5      to_char(maint_datetime, 'dd-Mon-yyyy HH24:MI:SS') AS maint_date_time,
-  6      p.prop_address,
+  6      p.prop_address,   
   7      o.owner_givname 
   8      || ' ' 
   9      || o.owner_famname AS owner_name
  10  FROM
- 11      MAINTENANCE m
+ 11      rent.MAINTENANCE m
  12      NATURAL JOIN PROPERTY p
  13      NATURAL JOIN OWNER o 
  14  WHERE
@@ -33,32 +33,13 @@ SQL> SELECT
  18      m.maint_cost DESC, 
  19      m.maint_datetime DESC;
 
-Error starting at line : 19 in command -
-SELECT 
-    m.maint_id,
-    m.maint_cost,
-    m.maint_desc,   
-    to_char(maint_datetime, 'dd-Mon-yyyy HH24:MI:SS') AS maint_date_time,
-    p.prop_address,
-    o.owner_givname 
-    || ' ' 
-    || o.owner_famname AS owner_name
-FROM
-    MAINTENANCE m
-    NATURAL JOIN PROPERTY p
-    NATURAL JOIN OWNER o 
-WHERE
-    m.maint_cost BETWEEN 1000 AND 3000 
-    AND m.maint_assigned = 'Y'
-ORDER BY
-    m.maint_cost DESC, 
-    m.maint_datetime DESC
-Error at Command Line : 29 Column : 5
-Error report -
-SQL Error: ORA-00942: table or view does not exist
-00942. 00000 -  "table or view does not exist"
-*Cause:    
-*Action:
+  MAINT_ID MAINT_DESC                                         MAINT_COST MAINT_DATE_TIME               PROP_ADDRESS                                                                     OWNER_NAME                               
+---------- -------------------------------------------------- ---------- ----------------------------- -------------------------------------------------------------------------------- -----------------------------------------
+        12 Fly screen replacement for front and back doors          1275 07-Nov-2022 09:00:00          282 Princes Highway, Unit 1, 6856, South Annashire, Victoria                     Ronald Meere                             
+         9 Front door lock replacement                              1275 07-Oct-2022 14:00:00          282 Princes Highway, Unit 1, 6856, South Annashire, Victoria                     Ronald Meere                             
+        10 Cleaning the house roof                                  1000 22-Oct-2022 13:00:00          928 Olivia Crest, Apt. 293, 4328, Connellymouth, Queensland                      Ludovika Wiggins                         
+         7 Painting living room walls, 30m2                         1000 06-Oct-2022 08:30:00          282 Princes Highway, Unit 1, 6856, South Annashire, Victoria                     Ronald Meere                             
+
 SQL> 
 SQL> 
 SQL> /*2*/
