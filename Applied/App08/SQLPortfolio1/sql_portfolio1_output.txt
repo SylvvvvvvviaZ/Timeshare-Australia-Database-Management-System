@@ -1,0 +1,247 @@
+SQL> 
+SQL> --****PLEASE ENTER YOUR DETAILS BELOW****
+SQL> --sql_portfolio1.sql
+SQL> 
+SQL> --Student ID:33049246
+SQL> --Student Name:XiaowenZhou
+SQL> --Unit Code:FIT2094
+SQL> --Applied Class No: Applied 01, Melbourne Wed 18:00
+SQL> 
+SQL> --set echo on
+SQL> --spool week7_schema_output.txt
+SQL> 
+SQL> /*Task 1: CREATE table POLICY and non FK constraints*/
+SQL> 
+SQL> CREATE TABLE policy (
+  2      policy_id        NUMBER(7) NOT NULL,
+  3      prop_no          NUMBER(4) NOT NULL,
+  4      policy_startdate DATE NOT NULL,
+  5      policy_type_code CHAR(1) NOT NULL,
+  6      policy_length    NUMBER(3) NOT NULL CHECK (policy_length >= 6),
+  7      insurer_code     CHAR(3) NOT NULL
+  8  );
+
+Table POLICY created.
+
+SQL> 
+SQL> COMMENT ON COLUMN policy.policy_id IS
+  2      'Policy unique identifier';
+
+Comment created.
+
+SQL> 
+SQL> COMMENT ON COLUMN policy.prop_no IS
+  2      'Property unique identifier';
+
+Comment created.
+
+SQL> 
+SQL> COMMENT ON COLUMN policy.policy_startdate IS
+  2      'Policy start date';
+
+Comment created.
+
+SQL> 
+SQL> COMMENT ON COLUMN policy.policy_type_code IS
+  2      'Policy type code';
+
+Comment created.
+
+SQL> 
+SQL> COMMENT ON COLUMN policy.policy_length IS
+  2      'Length of policy in months (minimum 6 months)';
+
+Comment created.
+
+SQL> 
+SQL> COMMENT ON COLUMN policy.insurer_code IS
+  2      'Insurance company code';
+
+Comment created.
+
+SQL> 
+SQL> /*Task 1: Add FK constraints*/
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_pk PRIMARY KEY ( policy_id );
+
+Table POLICY altered.
+
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_no_uq UNIQUE (prop_no);
+
+Table POLICY altered.
+
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_startdate_uq UNIQUE (policy_startdate);
+
+Table POLICY altered.
+
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_type_code_uq UNIQUE (policy_type_code);
+
+Table POLICY altered.
+
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT property_policy 
+  2      FOREIGN KEY (prop_no) REFERENCES property(prop_no);
+
+Table POLICY altered.
+
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT property_type_policy 
+  2      FOREIGN KEY (policy_type_code) REFERENCES policy_type(policy_type_code);
+
+Table POLICY altered.
+
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT insurer_policy 
+  2      FOREIGN KEY (insurer_code) REFERENCES insurer(insurer_code);
+
+Table POLICY altered.
+
+SQL> 
+SQL> /*Task 2*/
+SQL> 
+SQL> INSERT INTO policy (
+  2      policy_id,
+  3      prop_no,
+  4      policy_startdate,
+  5      policy_type_code,
+  6      policy_length,
+  7      insurer_code
+  8  ) VALUES (
+  9      policy_id_seq.NEXTVAL,
+ 10      7145,
+ 11      TO_DATE('2023-04-21', 'YYYY-MM-DD'),
+ 12      'B',
+ 13      12,
+ 14      'LAS'
+ 15  );
+
+1 row inserted.
+
+SQL> 
+SQL> INSERT INTO policy (
+  2      policy_id,
+  3      prop_no,
+  4      policy_startdate,
+  5      policy_type_code,
+  6      policy_length,
+  7      insurer_code
+  8  ) VALUES (
+  9      policy_id_seq.NEXTVAL,
+ 10      9346,
+ 11      TO_DATE('2023-04-21', 'YYYY-MM-DD'),
+ 12      'B',
+ 13      12,
+ 14      'LAS'
+ 15  );
+
+Error starting at line : 80 in command -
+INSERT INTO policy (
+    policy_id,
+    prop_no,
+    policy_startdate,
+    policy_type_code,
+    policy_length,
+    insurer_code
+) VALUES (
+    policy_id_seq.NEXTVAL,
+    9346,
+    TO_DATE('2023-04-21', 'YYYY-MM-DD'),
+    'B',
+    12,
+    'LAS'
+)
+Error report -
+ORA-00001: unique constraint (XZHO0118.POLICY_STARTDATE_UQ) violated
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> 
+SQL> /*Task 3*/
+SQL> 
+SQL> UPDATE policy
+  2  
+  3  SET
+  4      policy_length = policy_length + 6
+  5  WHERE
+  6          prop_no = 7145
+  7      AND policy_type_code = 'B'
+  8      AND policy_startdate = TO_DATE('2023-04-21', 'YYYY-MM-DD');
+
+1 row updated.
+
+SQL> 
+SQL> INSERT INTO policy (
+  2      policy_id,
+  3      prop_no,
+  4      policy_startdate,
+  5      policy_type_code,
+  6      policy_length,
+  7      insurer_code
+  8  ) VALUES (
+  9      policy_id_seq.NEXTVAL,
+ 10      7145,
+ 11      TO_DATE('2023-05-01', 'YYYY-MM-DD'),
+ 12      'C',
+ 13      12,
+ 14      'LAS'
+ 15  );
+
+Error starting at line : 110 in command -
+INSERT INTO policy (
+    policy_id,
+    prop_no,
+    policy_startdate,
+    policy_type_code,
+    policy_length,
+    insurer_code
+) VALUES (
+    policy_id_seq.NEXTVAL,
+    7145,
+    TO_DATE('2023-05-01', 'YYYY-MM-DD'),
+    'C',
+    12,
+    'LAS'
+)
+Error report -
+ORA-00001: unique constraint (XZHO0118.POLICY_NO_UQ) violated
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> 
+SQL> /*Task 4*/
+SQL> 
+SQL> DELETE FROM policy
+  2  
+  3  WHERE
+  4          prop_no = 7145
+  5      AND policy_type_code = 'B'
+  6      AND policy_startdate = TO_DATE('2023-04-21', 'YYYY-MM-DD');
+
+1 row deleted.
+
+SQL> 
+SQL> DELETE FROM policy
+  2  WHERE
+  3          prop_no = 7145
+  4      AND policy_type_code = 'C'
+  5      AND policy_startdate = TO_DATE('2023-05-01', 'YYYY-MM-DD');
+
+0 rows deleted.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> --Comment out SET ECHO and SPOOL commands before submitting your portfolio
+SQL> SPOOL OFF
