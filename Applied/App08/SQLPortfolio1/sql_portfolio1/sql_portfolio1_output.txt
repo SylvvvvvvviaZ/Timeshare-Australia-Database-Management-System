@@ -17,7 +17,7 @@ SQL> CREATE TABLE policy (
   3      prop_no          NUMBER(4) NOT NULL,
   4      policy_startdate DATE NOT NULL,
   5      policy_type_code CHAR(1) NOT NULL,
-  6      policy_length    NUMBER(3) NOT NULL,
+  6      policy_length    NUMBER(3) NOT NULL CHECK (policy_length >= 6),
   7      insurer_code     CHAR(3) NOT NULL
   8  );
 
@@ -67,54 +67,38 @@ SQL> ALTER TABLE policy ADD CONSTRAINT policy_pk PRIMARY KEY ( policy_id );
 Table POLICY altered.
 
 SQL> 
-SQL> ALTER TABLE policy ADD CONSTRAINT policy_no_uq UNIQUE ( prop_no );
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_no_uq UNIQUE (prop_no);
+
+Table POLICY altered.
+
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_startdate_uq UNIQUE (policy_startdate);
+
+Table POLICY altered.
+
+SQL> ALTER TABLE policy ADD CONSTRAINT policy_type_code_uq UNIQUE (policy_type_code);
 
 Table POLICY altered.
 
 SQL> 
-SQL> ALTER TABLE policy
-  2      ADD CONSTRAINT property_policy FOREIGN KEY (prop_no)
-  3          REFERENCES policy(prop_no);
+SQL> --ALTER TABLE policy ADD CONSTRAINT insurer_code_uq UNIQUE ( insurer_code );
+SQL> 
+SQL> ALTER TABLE policy ADD CONSTRAINT property_policy 
+  2      FOREIGN KEY (prop_no) REFERENCES property(prop_no);
 
 Table POLICY altered.
 
 SQL> 
-SQL> ALTER TABLE policy ADD CONSTRAINT policy_startdate_uq UNIQUE ( policy_startdate );
+SQL> ALTER TABLE policy ADD CONSTRAINT property_type_policy 
+  2      FOREIGN KEY (policy_type_code) REFERENCES policy_type(policy_type_code);
 
 Table POLICY altered.
 
 SQL> 
-SQL> ALTER TABLE policy ADD CONSTRAINT policy_type_code_uq UNIQUE ( policy_type_code );
+SQL> ALTER TABLE policy ADD CONSTRAINT insurer_policy 
+  2      FOREIGN KEY (insurer_code) REFERENCES insurer(insurer_code);
 
 Table POLICY altered.
 
-SQL> 
-SQL> ALTER TABLE policy
-  2      ADD CONSTRAINT property_type_policy FOREIGN KEY ( policy_type_code )
-  3          REFERENCES policy( policy_type_code );
-
-Table POLICY altered.
-
-SQL> 
-SQL> ALTER TABLE policy
-  2      ADD CONSTRAINT insurer_policy FOREIGN KEY ( insurer_code )
-  3          REFERENCES policy ( insurer_code );
-
-Error starting at line : 63 in command -
-ALTER TABLE policy
-    ADD CONSTRAINT insurer_policy FOREIGN KEY ( insurer_code )
-        REFERENCES policy ( insurer_code )
-Error report -
-ORA-02270: no matching unique or primary key for this column-list
-02270. 00000 -  "no matching unique or primary key for this column-list"
-*Cause:    A REFERENCES clause in a CREATE/ALTER TABLE statement
-           gives a column-list for which there is no matching unique or primary
-           key constraint in the referenced table.
-*Action:   Find the correct column names using the ALL_CONS_COLUMNS
-           catalog view
-SQL> 
-SQL> 
-SQL> 
 SQL> /*Task 2*/
 SQL> 
 SQL> --The policy_type_code 'B' indicates that this is a building insurance policy.       
@@ -136,7 +120,24 @@ SQL>     INSERT INTO policy (
  14          'LW'
  15      );
 
-1 row inserted.
+Error starting at line : 68 in command -
+    INSERT INTO policy (
+        policy_id,
+        prop_no,
+        policy_startdate,
+        policy_type_code,
+        policy_length,
+        insurer_code
+    ) VALUES (
+        1,
+        7145,
+         '21-APR-23',
+        'B',
+        12,
+        'LW'
+    )
+Error report -
+ORA-02291: integrity constraint (XZHO0118.INSURER_POLICY) violated - parent key not found
 
 SQL> INSERT INTO policy (
   2      policy_id,
@@ -154,7 +155,7 @@ SQL> INSERT INTO policy (
  14      'LW'
  15  );
 
-Error starting at line : 89 in command -
+Error starting at line : 83 in command -
 INSERT INTO policy (
     policy_id,
     prop_no,
@@ -171,7 +172,7 @@ INSERT INTO policy (
     'LW'
 )
 Error report -
-ORA-00001: unique constraint (XZHO0118.POLICY_STARTDATE_UQ) violated
+ORA-02291: integrity constraint (XZHO0118.INSURER_POLICY) violated - parent key not found
 
 SQL> 
 SQL> /*Task 3*/
@@ -180,7 +181,7 @@ SQL> -- Update the policy record for property number 7145
 SQL> 
 SQL> UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
 
-1 row updated.
+0 rows updated.
 
 SQL> 
 SQL> -- Insert a new policy record
@@ -200,7 +201,7 @@ SQL> INSERT
  14             12,
  15             'LW');
 
-Error starting at line : 112 in command -
+Error starting at line : 106 in command -
 INSERT
     INTO policy (
         policy_id,
@@ -217,7 +218,7 @@ VALUES (3,
            12,
            'LW')
 Error report -
-ORA-00001: unique constraint (XZHO0118.POLICY_NO_UQ) violated
+ORA-02291: integrity constraint (XZHO0118.INSURER_POLICY) violated - parent key not found
 
 SQL> 
 SQL> COMMIT;

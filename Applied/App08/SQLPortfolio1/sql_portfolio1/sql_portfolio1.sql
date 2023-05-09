@@ -20,7 +20,7 @@ CREATE TABLE policy (
     prop_no          NUMBER(4) NOT NULL,
     policy_startdate DATE NOT NULL,
     policy_type_code CHAR(1) NOT NULL,
-    policy_length    NUMBER(3) NOT NULL,
+    policy_length    NUMBER(3) NOT NULL CHECK (policy_length >= 6),
     insurer_code     CHAR(3) NOT NULL
 );
 
@@ -46,26 +46,20 @@ COMMENT ON COLUMN policy.insurer_code IS
 
 ALTER TABLE policy ADD CONSTRAINT policy_pk PRIMARY KEY ( policy_id );
 
-ALTER TABLE policy ADD CONSTRAINT policy_no_uq UNIQUE ( prop_no );
+ALTER TABLE policy ADD CONSTRAINT policy_no_uq UNIQUE (prop_no);
+ALTER TABLE policy ADD CONSTRAINT policy_startdate_uq UNIQUE (policy_startdate);
+ALTER TABLE policy ADD CONSTRAINT policy_type_code_uq UNIQUE (policy_type_code);
 
-ALTER TABLE policy
-    ADD CONSTRAINT property_policy FOREIGN KEY (prop_no)
-        REFERENCES policy(prop_no);
-        
-ALTER TABLE policy ADD CONSTRAINT policy_startdate_uq UNIQUE ( policy_startdate );
+--ALTER TABLE policy ADD CONSTRAINT insurer_code_uq UNIQUE ( insurer_code );
 
-ALTER TABLE policy ADD CONSTRAINT policy_type_code_uq UNIQUE ( policy_type_code );
-
-ALTER TABLE policy
-    ADD CONSTRAINT property_type_policy FOREIGN KEY ( policy_type_code )
-        REFERENCES policy( policy_type_code );
-
-ALTER TABLE policy
-    ADD CONSTRAINT insurer_policy FOREIGN KEY ( insurer_code )
-        REFERENCES policy ( insurer_code );
-
-
-
+ALTER TABLE policy ADD CONSTRAINT property_policy 
+    FOREIGN KEY (prop_no) REFERENCES property(prop_no);
+    
+ALTER TABLE policy ADD CONSTRAINT property_type_policy 
+    FOREIGN KEY (policy_type_code) REFERENCES policy_type(policy_type_code);
+    
+ALTER TABLE policy ADD CONSTRAINT insurer_policy 
+    FOREIGN KEY (insurer_code) REFERENCES insurer(insurer_code);
 /*Task 2*/
 
 --The policy_type_code 'B' indicates that this is a building insurance policy.       
