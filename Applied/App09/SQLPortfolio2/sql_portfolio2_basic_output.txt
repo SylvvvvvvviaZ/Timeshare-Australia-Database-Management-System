@@ -1,0 +1,73 @@
+SQL> 
+SQL> --****PLEASE ENTER YOUR DETAILS BELOW****
+SQL> --sql_portfolio2_basic.sql
+SQL> 
+SQL> --Student ID: 33049246
+SQL> --Student Name: Xiaowen Zhou
+SQL> --Unit Code: FIT2094
+SQL> --Applied Class No: Applied 01, Melbourne Wed 18:00
+SQL> 
+SQL> 
+SQL> /*1*/
+SQL> -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
+SQL> -- ENSURE that your query is formatted and has a semicolon
+SQL> -- (;) at the end of this answer
+SQL> 
+SQL> SELECT 
+  2      m.maint_id,
+  3      m.maint_cost,
+  4      m.maint_desc,   
+  5      to_char(maint_datetime, 'dd-Mon-yyyy HH24:MI:SS') AS maint_date_time,
+  6      p.prop_address,
+  7      o.owner_givname 
+  8      || ' ' 
+  9      || o.owner_famname AS owner_name
+ 10  FROM
+ 11      MAINTENANCE m
+ 12      NATURAL JOIN PROPERTY p
+ 13      NATURAL JOIN OWNER o 
+ 14  WHERE
+ 15      m.maint_cost BETWEEN 1000 AND 3000 
+ 16      AND m.maint_assigned = 'Y'
+ 17  ORDER BY
+ 18      m.maint_cost DESC, 
+ 19      m.maint_datetime DESC;
+
+Error starting at line : 19 in command -
+SELECT 
+    m.maint_id,
+    m.maint_cost,
+    m.maint_desc,   
+    to_char(maint_datetime, 'dd-Mon-yyyy HH24:MI:SS') AS maint_date_time,
+    p.prop_address,
+    o.owner_givname 
+    || ' ' 
+    || o.owner_famname AS owner_name
+FROM
+    MAINTENANCE m
+    NATURAL JOIN PROPERTY p
+    NATURAL JOIN OWNER o 
+WHERE
+    m.maint_cost BETWEEN 1000 AND 3000 
+    AND m.maint_assigned = 'Y'
+ORDER BY
+    m.maint_cost DESC, 
+    m.maint_datetime DESC
+Error at Command Line : 29 Column : 5
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> 
+SQL> /*2*/
+SQL> -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
+SQL> -- ENSURE that your query is formatted and has a semicolon
+SQL> -- (;) at the end of this answer
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> --Comment out SET ECHO and SPOOL commands before submitting your portfolio
+SQL> SPOOL OFF
