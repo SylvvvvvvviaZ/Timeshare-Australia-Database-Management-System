@@ -1,6 +1,6 @@
 --Comment out SET ECHO and SPOOL commands before submitting your portfolio
-SET ECHO ON
-SPOOL sql_portfolio1_output.txt
+--SET ECHO ON
+--SPOOL sql_portfolio1_output.txt
 
 --****PLEASE ENTER YOUR DETAILS BELOW****
 --sql_portfolio1.sql
