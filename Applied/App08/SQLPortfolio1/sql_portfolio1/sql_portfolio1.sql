@@ -61,8 +61,6 @@ ALTER TABLE policy ADD CONSTRAINT insurer_policy
     
 /*Task 2*/
 
---The policy_type_code 'B' indicates that this is a building insurance policy.       
---The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
 DECLARE
   v_policy_id_1 NUMBER;
   v_policy_id_2 NUMBER;
@@ -70,7 +68,10 @@ DECLARE
 BEGIN
     SELECT policy_id_seq.NEXTVAL INTO v_policy_id_1 FROM DUAL;
     SELECT policy_id_seq.NEXTVAL INTO v_policy_id_2 FROM DUAL;
-    
+
+--The policy_type_code 'B' indicates that this is a building insurance policy.       
+--The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
+
 INSERT INTO policy (
     policy_id,
     prop_no,
@@ -103,13 +104,57 @@ INSERT INTO policy (
     'LW'
 );
 
+COMMIT;
+
+END;
        
 /*Task 3*/
 
--- Update the policy record for property number 7145
+DECLARE
+    v_policy_id NUMBER;
+    
+BEGIN
+    SELECT
+        policy_id
+    INTO v_policy_id
+    FROM
+        policy
+    WHERE
+            prop_no = 7145
+        AND policy_startdate = TO_DATE('21-APR-2023', 'DD-MON-YYYY')
 
-UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
+UPDATE policy
+SET
+    policy_length = 18
+WHERE
+    policy_id = v_policy_id;
 
+SELECT
+    policy_id_seq.NEXTVAL
+INTO v_policy_id
+FROM
+    dual;
+
+INSERT INTO policy (
+    policy_id,
+    prop_no,
+    policy_startdate,
+    policy_type_code,
+    policy_length,
+    insurer_code
+) VALUES (
+    v_policy_id,
+    7145,
+    TO_DATE('01-MAY-2023', 'DD-MON-YYYY'),
+    'C',
+    12,
+    'LAI'
+);
+
+COMMIT;
+
+end;
+        
 -- Insert a new policy record
 INSERT
     INTO policy (

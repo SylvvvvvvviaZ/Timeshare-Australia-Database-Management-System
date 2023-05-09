@@ -142,58 +142,102 @@ SQL> DECLARE
  38      'LW'
  39  );
  40  
- 41  
- 42  /*Task 3*/
- 43  
- 44  -- Update the policy record for property number 7145
- 45  
- 46  UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
- 47  
- 48  -- Insert a new policy record
- 49  INSERT
- 50      INTO policy (
- 51          policy_id,
- 52          prop_no,
- 53          policy_startdate,
- 54          policy_type_code,
- 55          policy_length,
- 56          insurer_code
- 57      )
- 58  VALUES (3,
- 59             7145,
- 60             '01-MAY-23',
- 61             'B',
- 62             12,
- 63             'LW');
- 64  
- 65  COMMIT;
- 66  
- 67  
- 68  /*Task 4*/
- 69  
- 70  DELETE FROM policy
- 71  WHERE
- 72          prop_no = 7145
- 73      AND policy_startdate = DATE '2023-05-02'
- 74      AND policy_type_code = 'B'
- 75      AND policy_length = 6
- 76      AND insurer_code = 'LW';
- 77  
- 78  DELETE FROM policy
- 79  WHERE
- 80          prop_no = 7145
- 81      AND policy_startdate = DATE '2023-05-02'
- 82      AND policy_type_code = 'B'
- 83      AND policy_length = 12
- 84      AND insurer_code = 'LW';
- 85  
- 86  COMMIT;
+ 41  COMMIT;
+ 42  
+ 43  END;
+ 44  
+ 45  /*Task 3*/
+ 46  
+ 47  DECLARE
+ 48      v_policy_id NUMBER;
+ 49  
+ 50  BEGIN
+ 51      SELECT
+ 52          policy_id
+ 53      INTO v_policy_id
+ 54      FROM
+ 55          policy
+ 56      WHERE
+ 57              prop_no = 7145
+ 58          AND policy_startdate = TO_DATE('21-APR-2023', 'DD-MON-YYYY')
+ 59  
+ 60  UPDATE policy
+ 61  SET
+ 62      policy_length = 18
+ 63  WHERE
+ 64      policy_id = v_policy_id;
+ 65  
+ 66  SELECT
+ 67      policy_id_seq.NEXTVAL
+ 68  INTO v_policy_id
+ 69  FROM
+ 70      dual;
+ 71  
+ 72  INSERT INTO policy (
+ 73      policy_id,
+ 74      prop_no,
+ 75      policy_startdate,
+ 76      policy_type_code,
+ 77      policy_length,
+ 78      insurer_code
+ 79  ) VALUES (
+ 80      v_policy_id,
+ 81      7145,
+ 82      TO_DATE('01-MAY-2023', 'DD-MON-YYYY'),
+ 83      'C',
+ 84      12,
+ 85      'LAI'
+ 86  );
  87  
- 88  
+ 88  COMMIT;
  89  
- 90  --Comment out SET ECHO and SPOOL commands before submitting your portfolio
- 91  SPOOL OFF
- 92  SET ECHO OFF
+ 90  end;
+ 91  
+ 92  -- Insert a new policy record
+ 93  INSERT
+ 94      INTO policy (
+ 95          policy_id,
+ 96          prop_no,
+ 97          policy_startdate,
+ 98          policy_type_code,
+ 99          policy_length,
+100          insurer_code
+101      )
+102  VALUES (3,
+103             7145,
+104             '01-MAY-23',
+105             'B',
+106             12,
+107             'LW');
+108  
+109  COMMIT;
+110  
+111  
+112  /*Task 4*/
+113  
+114  DELETE FROM policy
+115  WHERE
+116          prop_no = 7145
+117      AND policy_startdate = DATE '2023-05-02'
+118      AND policy_type_code = 'B'
+119      AND policy_length = 6
+120      AND insurer_code = 'LW';
+121  
+122  DELETE FROM policy
+123  WHERE
+124          prop_no = 7145
+125      AND policy_startdate = DATE '2023-05-02'
+126      AND policy_type_code = 'B'
+127      AND policy_length = 12
+128      AND insurer_code = 'LW';
+129  
+130  COMMIT;
+131  
+132  
+133  
+134  --Comment out SET ECHO and SPOOL commands before submitting your portfolio
+135  SPOOL OFF
+136  SET ECHO OFF
 
 Error starting at line : 66 in command -
 DECLARE
@@ -236,12 +280,56 @@ INSERT INTO policy (
     'LW'
 );
 
+COMMIT;
+
+END;
 
 /*Task 3*/
 
--- Update the policy record for property number 7145
+DECLARE
+    v_policy_id NUMBER;
 
-UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
+BEGIN
+    SELECT
+        policy_id
+    INTO v_policy_id
+    FROM
+        policy
+    WHERE
+            prop_no = 7145
+        AND policy_startdate = TO_DATE('21-APR-2023', 'DD-MON-YYYY')
+
+UPDATE policy
+SET
+    policy_length = 18
+WHERE
+    policy_id = v_policy_id;
+
+SELECT
+    policy_id_seq.NEXTVAL
+INTO v_policy_id
+FROM
+    dual;
+
+INSERT INTO policy (
+    policy_id,
+    prop_no,
+    policy_startdate,
+    policy_type_code,
+    policy_length,
+    insurer_code
+) VALUES (
+    v_policy_id,
+    7145,
+    TO_DATE('01-MAY-2023', 'DD-MON-YYYY'),
+    'C',
+    12,
+    'LAI'
+);
+
+COMMIT;
+
+end;
 
 -- Insert a new policy record
 INSERT
@@ -289,10 +377,8 @@ COMMIT;
 SPOOL OFF
 SET ECHO OFF
 Error report -
-ORA-06550: line 91, column 7:
-PLS-00103: Encountered the symbol "OFF" when expecting one of the following:
-
-   := . ( @ % ;
+ORA-06550: line 47, column 1:
+PLS-00103: Encountered the symbol "DECLARE" 
 06550. 00000 -  "line %s, column %s:\n%s"
 *Cause:    Usually a PL/SQL compilation error.
 *Action:
