@@ -50,8 +50,6 @@ ALTER TABLE policy ADD CONSTRAINT policy_no_uq UNIQUE (prop_no);
 ALTER TABLE policy ADD CONSTRAINT policy_startdate_uq UNIQUE (policy_startdate);
 ALTER TABLE policy ADD CONSTRAINT policy_type_code_uq UNIQUE (policy_type_code);
 
---ALTER TABLE policy ADD CONSTRAINT insurer_code_uq UNIQUE ( insurer_code );
-
 ALTER TABLE policy ADD CONSTRAINT property_policy 
     FOREIGN KEY (prop_no) REFERENCES property(prop_no);
     
@@ -60,26 +58,19 @@ ALTER TABLE policy ADD CONSTRAINT property_type_policy
     
 ALTER TABLE policy ADD CONSTRAINT insurer_policy 
     FOREIGN KEY (insurer_code) REFERENCES insurer(insurer_code);
+    
 /*Task 2*/
 
 --The policy_type_code 'B' indicates that this is a building insurance policy.       
 --The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
-
-    INSERT INTO policy (
-        policy_id,
-        prop_no,
-        policy_startdate,
-        policy_type_code,
-        policy_length,
-        insurer_code
-    ) VALUES (
-        1,
-        7145,
-         '21-APR-23',
-        'B',
-        12,
-        'LW'
-    );
+DECLARE
+  v_policy_id_1 NUMBER;
+  v_policy_id_2 NUMBER;
+  
+BEGIN
+    SELECT policy_id_seq.NEXTVAL INTO v_policy_id_1 FROM DUAL;
+    SELECT policy_id_seq.NEXTVAL INTO v_policy_id_2 FROM DUAL;
+    
 INSERT INTO policy (
     policy_id,
     prop_no,
@@ -88,13 +79,30 @@ INSERT INTO policy (
     policy_length,
     insurer_code
 ) VALUES (
-    2,
-    9346,
-    '21-APR-23',
+    v_policy_id_1,
+    7145,
+    TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
     'B',
     12,
     'LW'
 );
+
+INSERT INTO policy (
+    policy_id,
+    prop_no,
+    policy_startdate,
+    policy_type_code,
+    policy_length,
+    insurer_code
+) VALUES (
+    v_policy_id_2,
+    9346,
+    TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
+    'B',
+    12,
+    'LW'
+);
+
        
 /*Task 3*/
 

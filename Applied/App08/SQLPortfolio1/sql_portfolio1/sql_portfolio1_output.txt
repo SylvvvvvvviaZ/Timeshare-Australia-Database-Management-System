@@ -80,8 +80,6 @@ SQL> ALTER TABLE policy ADD CONSTRAINT policy_type_code_uq UNIQUE (policy_type_c
 Table POLICY altered.
 
 SQL> 
-SQL> --ALTER TABLE policy ADD CONSTRAINT insurer_code_uq UNIQUE ( insurer_code );
-SQL> 
 SQL> ALTER TABLE policy ADD CONSTRAINT property_policy 
   2      FOREIGN KEY (prop_no) REFERENCES property(prop_no);
 
@@ -99,63 +97,113 @@ SQL> ALTER TABLE policy ADD CONSTRAINT insurer_policy
 
 Table POLICY altered.
 
+SQL> 
 SQL> /*Task 2*/
 SQL> 
 SQL> --The policy_type_code 'B' indicates that this is a building insurance policy.       
 SQL> --The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
-SQL> 
-SQL>     INSERT INTO policy (
-  2          policy_id,
-  3          prop_no,
-  4          policy_startdate,
-  5          policy_type_code,
-  6          policy_length,
-  7          insurer_code
-  8      ) VALUES (
-  9          1,
- 10          7145,
- 11           '21-APR-23',
- 12          'B',
- 13          12,
- 14          'LW'
- 15      );
+SQL> DECLARE
+  2    v_policy_id_1 NUMBER;
+  3    v_policy_id_2 NUMBER;
+  4  
+  5  BEGIN
+  6      SELECT policy_id_seq.NEXTVAL INTO v_policy_id_1 FROM DUAL;
+  7      SELECT policy_id_seq.NEXTVAL INTO v_policy_id_2 FROM DUAL;
+  8  
+  9  INSERT INTO policy (
+ 10      policy_id,
+ 11      prop_no,
+ 12      policy_startdate,
+ 13      policy_type_code,
+ 14      policy_length,
+ 15      insurer_code
+ 16  ) VALUES (
+ 17      v_policy_id_1,
+ 18      7145,
+ 19      TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
+ 20      'B',
+ 21      12,
+ 22      'LW'
+ 23  );
+ 24  
+ 25  INSERT INTO policy (
+ 26      policy_id,
+ 27      prop_no,
+ 28      policy_startdate,
+ 29      policy_type_code,
+ 30      policy_length,
+ 31      insurer_code
+ 32  ) VALUES (
+ 33      v_policy_id_2,
+ 34      9346,
+ 35      TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
+ 36      'B',
+ 37      12,
+ 38      'LW'
+ 39  );
+ 40  
+ 41  
+ 42  /*Task 3*/
+ 43  
+ 44  -- Update the policy record for property number 7145
+ 45  
+ 46  UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
+ 47  
+ 48  -- Insert a new policy record
+ 49  INSERT
+ 50      INTO policy (
+ 51          policy_id,
+ 52          prop_no,
+ 53          policy_startdate,
+ 54          policy_type_code,
+ 55          policy_length,
+ 56          insurer_code
+ 57      )
+ 58  VALUES (3,
+ 59             7145,
+ 60             '01-MAY-23',
+ 61             'B',
+ 62             12,
+ 63             'LW');
+ 64  
+ 65  COMMIT;
+ 66  
+ 67  
+ 68  /*Task 4*/
+ 69  
+ 70  DELETE FROM policy
+ 71  WHERE
+ 72          prop_no = 7145
+ 73      AND policy_startdate = DATE '2023-05-02'
+ 74      AND policy_type_code = 'B'
+ 75      AND policy_length = 6
+ 76      AND insurer_code = 'LW';
+ 77  
+ 78  DELETE FROM policy
+ 79  WHERE
+ 80          prop_no = 7145
+ 81      AND policy_startdate = DATE '2023-05-02'
+ 82      AND policy_type_code = 'B'
+ 83      AND policy_length = 12
+ 84      AND insurer_code = 'LW';
+ 85  
+ 86  COMMIT;
+ 87  
+ 88  
+ 89  
+ 90  --Comment out SET ECHO and SPOOL commands before submitting your portfolio
+ 91  SPOOL OFF
+ 92  SET ECHO OFF
 
-Error starting at line : 68 in command -
-    INSERT INTO policy (
-        policy_id,
-        prop_no,
-        policy_startdate,
-        policy_type_code,
-        policy_length,
-        insurer_code
-    ) VALUES (
-        1,
-        7145,
-         '21-APR-23',
-        'B',
-        12,
-        'LW'
-    )
-Error report -
-ORA-02291: integrity constraint (XZHO0118.INSURER_POLICY) violated - parent key not found
+Error starting at line : 66 in command -
+DECLARE
+  v_policy_id_1 NUMBER;
+  v_policy_id_2 NUMBER;
 
-SQL> INSERT INTO policy (
-  2      policy_id,
-  3      prop_no,
-  4      policy_startdate,
-  5      policy_type_code,
-  6      policy_length,
-  7      insurer_code
-  8  ) VALUES (
-  9      2,
- 10      9346,
- 11      '21-APR-23',
- 12      'B',
- 13      12,
- 14      'LW'
- 15  );
+BEGIN
+    SELECT policy_id_seq.NEXTVAL INTO v_policy_id_1 FROM DUAL;
+    SELECT policy_id_seq.NEXTVAL INTO v_policy_id_2 FROM DUAL;
 
-Error starting at line : 83 in command -
 INSERT INTO policy (
     policy_id,
     prop_no,
@@ -164,44 +212,38 @@ INSERT INTO policy (
     policy_length,
     insurer_code
 ) VALUES (
-    2,
-    9346,
-    '21-APR-23',
+    v_policy_id_1,
+    7145,
+    TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
     'B',
     12,
     'LW'
-)
-Error report -
-ORA-02291: integrity constraint (XZHO0118.INSURER_POLICY) violated - parent key not found
+);
 
-SQL> 
-SQL> /*Task 3*/
-SQL> 
-SQL> -- Update the policy record for property number 7145
-SQL> 
-SQL> UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
+INSERT INTO policy (
+    policy_id,
+    prop_no,
+    policy_startdate,
+    policy_type_code,
+    policy_length,
+    insurer_code
+) VALUES (
+    v_policy_id_2,
+    9346,
+    TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
+    'B',
+    12,
+    'LW'
+);
 
-0 rows updated.
 
-SQL> 
-SQL> -- Insert a new policy record
-SQL> INSERT
-  2      INTO policy (
-  3          policy_id,
-  4          prop_no,
-  5          policy_startdate,
-  6          policy_type_code,
-  7          policy_length,
-  8          insurer_code
-  9      )
- 10  VALUES (3,
- 11             7145,
- 12             '01-MAY-23',
- 13             'B',
- 14             12,
- 15             'LW');
+/*Task 3*/
 
-Error starting at line : 106 in command -
+-- Update the policy record for property number 7145
+
+UPDATE policy SET policy_length = 18 WHERE prop_no = 7145;
+
+-- Insert a new policy record
 INSERT
     INTO policy (
         policy_id,
@@ -216,47 +258,41 @@ VALUES (3,
            '01-MAY-23',
            'B',
            12,
-           'LW')
+           'LW');
+
+COMMIT;
+
+
+/*Task 4*/
+
+DELETE FROM policy
+WHERE
+        prop_no = 7145
+    AND policy_startdate = DATE '2023-05-02'
+    AND policy_type_code = 'B'
+    AND policy_length = 6
+    AND insurer_code = 'LW';
+
+DELETE FROM policy
+WHERE
+        prop_no = 7145
+    AND policy_startdate = DATE '2023-05-02'
+    AND policy_type_code = 'B'
+    AND policy_length = 12
+    AND insurer_code = 'LW';
+
+COMMIT;
+
+
+
+--Comment out SET ECHO and SPOOL commands before submitting your portfolio
+SPOOL OFF
+SET ECHO OFF
 Error report -
-ORA-02291: integrity constraint (XZHO0118.INSURER_POLICY) violated - parent key not found
+ORA-06550: line 91, column 7:
+PLS-00103: Encountered the symbol "OFF" when expecting one of the following:
 
-SQL> 
-SQL> COMMIT;
-
-Commit complete.
-
-SQL> 
-SQL> 
-SQL> /*Task 4*/
-SQL> 
-SQL> DELETE FROM policy
-  2  WHERE
-  3          prop_no = 7145
-  4      AND policy_startdate = DATE '2023-05-02'
-  5      AND policy_type_code = 'B'
-  6      AND policy_length = 6
-  7      AND insurer_code = 'LW';
-
-0 rows deleted.
-
-SQL> 
-SQL> DELETE FROM policy
-  2  WHERE
-  3          prop_no = 7145
-  4      AND policy_startdate = DATE '2023-05-02'
-  5      AND policy_type_code = 'B'
-  6      AND policy_length = 12
-  7      AND insurer_code = 'LW';
-
-0 rows deleted.
-
-SQL> 
-SQL> COMMIT;
-
-Commit complete.
-
-SQL> 
-SQL> 
-SQL> 
-SQL> --Comment out SET ECHO and SPOOL commands before submitting your portfolio
-SQL> SPOOL OFF
+   := . ( @ % ;
+06550. 00000 -  "line %s, column %s:\n%s"
+*Cause:    Usually a PL/SQL compilation error.
+*Action:
