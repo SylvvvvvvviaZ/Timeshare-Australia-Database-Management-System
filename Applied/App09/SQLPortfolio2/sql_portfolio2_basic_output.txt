@@ -19,19 +19,20 @@ SQL> SELECT
   4      m.maint_cost,
   5      to_char(maint_datetime, 'dd-Mon-yyyy HH24:MI:SS') AS maint_date_time,
   6      p.prop_address,
-  7      o.owner_givname
-  8      || ' '
-  9      || o.owner_famname AS owner_name
- 10  FROM
- 11      rent.maintenance m
- 12      NATURAL JOIN property p
- 13      NATURAL JOIN owner    o
- 14  WHERE
- 15      m.maint_cost BETWEEN 1000 AND 3000
- 16      AND m.maint_assigned = 'Y'
- 17  ORDER BY
- 18      m.maint_cost DESC,
- 19      m.maint_datetime DESC;
+  7  
+  8      o.owner_givname
+  9      || ' '
+ 10      || o.owner_famname AS owner_name
+ 11  FROM
+ 12      rent.maintenance m
+ 13      NATURAL JOIN property p
+ 14      NATURAL JOIN owner o
+ 15  WHERE
+ 16      m.maint_cost BETWEEN 1000 AND 3000
+ 17      AND m.maint_assigned = 'Y'
+ 18  ORDER BY
+ 19      m.maint_cost DESC,
+ 20      m.maint_datetime DESC;
 
   MAINT_ID MAINT_DESC                                         MAINT_COST MAINT_DATE_TIME               PROP_ADDRESS                                                                     OWNER_NAME                               
 ---------- -------------------------------------------------- ---------- ----------------------------- -------------------------------------------------------------------------------- -----------------------------------------
@@ -54,24 +55,26 @@ SQL> SELECT
   6      || t.tenant_givname 
   7      || ' ' 
   8      || t.tenant_famname AS tenant_name,
-  9      p.prop_address,
- 10      o.owner_givname
- 11      || ' ' 
- 12      || o.owner_famname AS owner_name, 
- 13      r.rent_lease_period 
- 14      || ' months' AS rent_lease_period 
- 15  FROM
- 16      rent.rent r
- 17      JOIN rent.property p ON r.prop_no = p.prop_no 
- 18      JOIN rent.tenant t ON r.tenant_no = t.tenant_no 
- 19      JOIN rent.owner o ON p.owner_no = o.owner_no 
- 20  WHERE 
- 21      r.rent_lease_start >= to_date('01-JAN-2022','dd-MON-yyyy')
- 22      AND r.rent_weekly_rate < 425 
- 23      AND r.rent_lease_period >= 6 
- 24  ORDER BY 
- 25      r.rent_lease_period DESC, 
- 26      t.tenant_no ASC;
+  9  
+ 10      p.prop_address,
+ 11      o.owner_givname
+ 12      || ' ' 
+ 13      || o.owner_famname AS owner_name, 
+ 14  
+ 15      r.rent_lease_period 
+ 16      || ' months' AS rent_lease_period 
+ 17  FROM
+ 18      rent.rent r
+ 19      JOIN rent.property p ON r.prop_no = p.prop_no 
+ 20      JOIN rent.tenant t ON r.tenant_no = t.tenant_no 
+ 21      JOIN rent.owner o ON p.owner_no = o.owner_no 
+ 22  WHERE 
+ 23      r.rent_lease_start >= to_date('01-JAN-2022','dd-MON-yyyy')
+ 24      AND r.rent_weekly_rate < 425 
+ 25      AND r.rent_lease_period >= 6 
+ 26  ORDER BY 
+ 27      r.rent_lease_period DESC, 
+ 28      t.tenant_no ASC;
 
 RENT_AGREEMENT_NO  TENANT_NO TENANT_NAME                                      PROP_ADDRESS                                                                     OWNER_NAME                                RENT_LEASE_PERIOD                              
 ----------------- ---------- ------------------------------------------------ -------------------------------------------------------------------------------- ----------------------------------------- -----------------------------------------------

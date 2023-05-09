@@ -22,13 +22,14 @@ SELECT
     m.maint_cost,
     to_char(maint_datetime, 'dd-Mon-yyyy HH24:MI:SS') AS maint_date_time,
     p.prop_address,
+    
     o.owner_givname
     || ' '
     || o.owner_famname AS owner_name
 FROM
     rent.maintenance m
     NATURAL JOIN property p
-    NATURAL JOIN owner    o
+    NATURAL JOIN owner o
 WHERE
     m.maint_cost BETWEEN 1000 AND 3000
     AND m.maint_assigned = 'Y'
@@ -49,10 +50,12 @@ SELECT
     || t.tenant_givname 
     || ' ' 
     || t.tenant_famname AS tenant_name,
+    
     p.prop_address,
     o.owner_givname
     || ' ' 
     || o.owner_famname AS owner_name, 
+    
     r.rent_lease_period 
     || ' months' AS rent_lease_period 
 FROM
