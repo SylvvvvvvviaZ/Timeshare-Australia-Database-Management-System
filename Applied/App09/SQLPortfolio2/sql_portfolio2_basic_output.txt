@@ -13,24 +13,24 @@ SQL> -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
 SQL> -- ENSURE that your query is formatted and has a semicolon
 SQL> -- (;) at the end of this answer
 SQL> 
-SQL> SELECT 
+SQL> SELECT
   2      m.maint_id,
   3      m.maint_desc,
   4      m.maint_cost,
   5      to_char(maint_datetime, 'dd-Mon-yyyy HH24:MI:SS') AS maint_date_time,
-  6      p.prop_address,   
-  7      o.owner_givname 
-  8      || ' ' 
+  6      p.prop_address,
+  7      o.owner_givname
+  8      || ' '
   9      || o.owner_famname AS owner_name
  10  FROM
- 11      rent.MAINTENANCE m
- 12      NATURAL JOIN PROPERTY p
- 13      NATURAL JOIN OWNER o 
+ 11      rent.maintenance m
+ 12      NATURAL JOIN property p
+ 13      NATURAL JOIN owner    o
  14  WHERE
- 15      m.maint_cost BETWEEN 1000 AND 3000 
+ 15      m.maint_cost BETWEEN 1000 AND 3000
  16      AND m.maint_assigned = 'Y'
  17  ORDER BY
- 18      m.maint_cost DESC, 
+ 18      m.maint_cost DESC,
  19      m.maint_datetime DESC;
 
   MAINT_ID MAINT_DESC                                         MAINT_COST MAINT_DATE_TIME               PROP_ADDRESS                                                                     OWNER_NAME                               
@@ -41,14 +41,44 @@ SQL> SELECT
          7 Painting living room walls, 30m2                         1000 06-Oct-2022 08:30:00          282 Princes Highway, Unit 1, 6856, South Annashire, Victoria                     Ronald Meere                             
 
 SQL> 
-SQL> 
 SQL> /*2*/
 SQL> -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
 SQL> -- ENSURE that your query is formatted and has a semicolon
 SQL> -- (;) at the end of this answer
 SQL> 
-SQL> 
-SQL> 
+SQL> SELECT
+  2      r.rent_agreement_no,
+  3      t.tenant_no, 
+  4      t.tenant_title 
+  5      || '. ' 
+  6      || t.tenant_givname 
+  7      || ' ' 
+  8      || t.tenant_famname AS tenant_name,
+  9      p.prop_address,
+ 10      o.owner_givname
+ 11      || ' ' 
+ 12      || o.owner_famname AS owner_name, 
+ 13      r.rent_lease_period 
+ 14      || ' months' AS rent_lease_period 
+ 15  FROM
+ 16      rent.rent r
+ 17      JOIN rent.property p ON r.prop_no = p.prop_no 
+ 18      JOIN rent.tenant t ON r.tenant_no = t.tenant_no 
+ 19      JOIN rent.owner o ON p.owner_no = o.owner_no 
+ 20  WHERE 
+ 21      r.rent_lease_start >= to_date('01-JAN-2022','dd-MON-yyyy')
+ 22      AND r.rent_weekly_rate < 425 
+ 23      AND r.rent_lease_period >= 6 
+ 24  ORDER BY 
+ 25      r.rent_lease_period DESC, 
+ 26      t.tenant_no ASC;
+
+RENT_AGREEMENT_NO  TENANT_NO TENANT_NAME                                      PROP_ADDRESS                                                                     OWNER_NAME                                RENT_LEASE_PERIOD                              
+----------------- ---------- ------------------------------------------------ -------------------------------------------------------------------------------- ----------------------------------------- -----------------------------------------------
+               25       1286 Ms. Dacey Demchen                                928 Olivia Crest, Apt. 293, 4328, Connellymouth, Queensland                      Ludovika Wiggins                          9 months                                       
+               24       2720 Ms. Patricia Stroband                            531 Sienna Run, Suite 991, 6792, Boscoburgh, Queensland                          Ludovika Wiggins                          9 months                                       
+               23       2524 Mr. Rich Suggate                                 26 Hackett Knoll, Apt. 615, 6856, South Annashire, Victoria                      Ronald Meere                              6 months                                       
+
 SQL> 
 SQL> --Comment out SET ECHO and SPOOL commands before submitting your portfolio
 SQL> SPOOL OFF
