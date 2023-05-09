@@ -100,154 +100,42 @@ Table POLICY altered.
 SQL> 
 SQL> /*Task 2*/
 SQL> 
-SQL> --The policy_type_code 'B' indicates that this is a building insurance policy.       
-SQL> --The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
-SQL> DECLARE
-  2    v_policy_id_1 NUMBER;
-  3    v_policy_id_2 NUMBER;
-  4  
-  5  BEGIN
-  6      SELECT policy_id_seq.NEXTVAL INTO v_policy_id_1 FROM DUAL;
-  7      SELECT policy_id_seq.NEXTVAL INTO v_policy_id_2 FROM DUAL;
-  8  
-  9  INSERT INTO policy (
- 10      policy_id,
- 11      prop_no,
- 12      policy_startdate,
- 13      policy_type_code,
- 14      policy_length,
- 15      insurer_code
- 16  ) VALUES (
- 17      v_policy_id_1,
- 18      7145,
- 19      TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
- 20      'B',
- 21      12,
- 22      'LW'
- 23  );
- 24  
- 25  INSERT INTO policy (
- 26      policy_id,
- 27      prop_no,
- 28      policy_startdate,
- 29      policy_type_code,
- 30      policy_length,
- 31      insurer_code
- 32  ) VALUES (
- 33      v_policy_id_2,
- 34      9346,
- 35      TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
- 36      'B',
- 37      12,
- 38      'LW'
- 39  );
- 40  
- 41  COMMIT;
- 42  
- 43  END;
- 44  
- 45  /*Task 3*/
- 46  
- 47  DECLARE
- 48      v_policy_id NUMBER;
- 49  
- 50  BEGIN
- 51      SELECT
- 52          policy_id
- 53      INTO v_policy_id
- 54      FROM
- 55          policy
- 56      WHERE
- 57              prop_no = 7145
- 58          AND policy_startdate = TO_DATE('21-APR-2023', 'DD-MON-YYYY')
- 59  
- 60  UPDATE policy
- 61  SET
- 62      policy_length = 18
- 63  WHERE
- 64      policy_id = v_policy_id;
- 65  
- 66  SELECT
- 67      policy_id_seq.NEXTVAL
- 68  INTO v_policy_id
- 69  FROM
- 70      dual;
- 71  
- 72  INSERT INTO policy (
- 73      policy_id,
- 74      prop_no,
- 75      policy_startdate,
- 76      policy_type_code,
- 77      policy_length,
- 78      insurer_code
- 79  ) VALUES (
- 80      v_policy_id,
- 81      7145,
- 82      TO_DATE('01-MAY-2023', 'DD-MON-YYYY'),
- 83      'C',
- 84      12,
- 85      'LAI'
- 86  );
- 87  
- 88  COMMIT;
- 89  
- 90  end;
- 91  
- 92  -- Insert a new policy record
- 93  INSERT
- 94      INTO policy (
- 95          policy_id,
- 96          prop_no,
- 97          policy_startdate,
- 98          policy_type_code,
- 99          policy_length,
-100          insurer_code
-101      )
-102  VALUES (3,
-103             7145,
-104             '01-MAY-23',
-105             'B',
-106             12,
-107             'LW');
-108  
-109  COMMIT;
-110  
-111  
-112  /*Task 4*/
-113  
-114  DELETE FROM policy
-115  WHERE
-116          prop_no = 7145
-117      AND policy_startdate = DATE '2023-05-02'
-118      AND policy_type_code = 'B'
-119      AND policy_length = 6
-120      AND insurer_code = 'LW';
-121  
-122  DELETE FROM policy
-123  WHERE
-124          prop_no = 7145
-125      AND policy_startdate = DATE '2023-05-02'
-126      AND policy_type_code = 'B'
-127      AND policy_length = 12
-128      AND insurer_code = 'LW';
-129  
-130  COMMIT;
-131  
-132  
-133  
-134  --Comment out SET ECHO and SPOOL commands before submitting your portfolio
-135  SPOOL OFF
-136  SET ECHO OFF
+SQL> INSERT INTO policy (
+  2      policy_id,
+  3      prop_no,
+  4      policy_startdate,
+  5      policy_type_code,
+  6      policy_length,
+  7      insurer_code
+  8  ) VALUES (
+  9      policy_id_seq.NEXTVAL,
+ 10      7145,
+ 11      TO_DATE('2023-04-21', 'YYYY-MM-DD'),
+ 12      'B',
+ 13      12,
+ 14      'LAS'
+ 15  );
 
-Error starting at line : 66 in command -
-DECLARE
-  v_policy_id_1 NUMBER;
-  v_policy_id_2 NUMBER;
+1 row inserted.
 
-BEGIN
-    SELECT policy_id_seq.NEXTVAL INTO v_policy_id_1 FROM DUAL;
-    SELECT policy_id_seq.NEXTVAL INTO v_policy_id_2 FROM DUAL;
+SQL> 
+SQL> INSERT INTO policy (
+  2      policy_id,
+  3      prop_no,
+  4      policy_startdate,
+  5      policy_type_code,
+  6      policy_length,
+  7      insurer_code
+  8  ) VALUES (
+  9      policy_id_seq.NEXTVAL,
+ 10      9346,
+ 11      TO_DATE('2023-04-21', 'YYYY-MM-DD'),
+ 12      'B',
+ 13      12,
+ 14      'LAS'
+ 15  );
 
+Error starting at line : 80 in command -
 INSERT INTO policy (
     policy_id,
     prop_no,
@@ -256,61 +144,54 @@ INSERT INTO policy (
     policy_length,
     insurer_code
 ) VALUES (
-    v_policy_id_1,
-    7145,
-    TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
-    'B',
-    12,
-    'LW'
-);
-
-INSERT INTO policy (
-    policy_id,
-    prop_no,
-    policy_startdate,
-    policy_type_code,
-    policy_length,
-    insurer_code
-) VALUES (
-    v_policy_id_2,
+    policy_id_seq.NEXTVAL,
     9346,
-    TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
+    TO_DATE('2023-04-21', 'YYYY-MM-DD'),
     'B',
     12,
-    'LW'
-);
+    'LAS'
+)
+Error report -
+ORA-00001: unique constraint (XZHO0118.POLICY_STARTDATE_UQ) violated
 
-COMMIT;
+SQL> 
+SQL> COMMIT;
 
-END;
+Commit complete.
 
-/*Task 3*/
+SQL> 
+SQL> 
+SQL> /*Task 3*/
+SQL> 
+SQL> UPDATE policy
+  2  
+  3  SET
+  4      policy_length = policy_length + 6
+  5  WHERE
+  6          prop_no = 7145
+  7      AND policy_type_code = 'B'
+  8      AND policy_startdate = TO_DATE('2023-04-21', 'YYYY-MM-DD');
 
-DECLARE
-    v_policy_id NUMBER;
+1 row updated.
 
-BEGIN
-    SELECT
-        policy_id
-    INTO v_policy_id
-    FROM
-        policy
-    WHERE
-            prop_no = 7145
-        AND policy_startdate = TO_DATE('21-APR-2023', 'DD-MON-YYYY')
+SQL> 
+SQL> INSERT INTO policy (
+  2      policy_id,
+  3      prop_no,
+  4      policy_startdate,
+  5      policy_type_code,
+  6      policy_length,
+  7      insurer_code
+  8  ) VALUES (
+  9      policy_id_seq.NEXTVAL,
+ 10      7145,
+ 11      TO_DATE('2023-05-01', 'YYYY-MM-DD'),
+ 12      'C',
+ 13      12,
+ 14      'LAS'
+ 15  );
 
-UPDATE policy
-SET
-    policy_length = 18
-WHERE
-    policy_id = v_policy_id;
-
-SELECT
-    policy_id_seq.NEXTVAL
-INTO v_policy_id
-FROM
-    dual;
-
+Error starting at line : 110 in command -
 INSERT INTO policy (
     policy_id,
     prop_no,
@@ -319,66 +200,48 @@ INSERT INTO policy (
     policy_length,
     insurer_code
 ) VALUES (
-    v_policy_id,
+    policy_id_seq.NEXTVAL,
     7145,
-    TO_DATE('01-MAY-2023', 'DD-MON-YYYY'),
+    TO_DATE('2023-05-01', 'YYYY-MM-DD'),
     'C',
     12,
-    'LAI'
-);
-
-COMMIT;
-
-end;
-
--- Insert a new policy record
-INSERT
-    INTO policy (
-        policy_id,
-        prop_no,
-        policy_startdate,
-        policy_type_code,
-        policy_length,
-        insurer_code
-    )
-VALUES (3,
-           7145,
-           '01-MAY-23',
-           'B',
-           12,
-           'LW');
-
-COMMIT;
-
-
-/*Task 4*/
-
-DELETE FROM policy
-WHERE
-        prop_no = 7145
-    AND policy_startdate = DATE '2023-05-02'
-    AND policy_type_code = 'B'
-    AND policy_length = 6
-    AND insurer_code = 'LW';
-
-DELETE FROM policy
-WHERE
-        prop_no = 7145
-    AND policy_startdate = DATE '2023-05-02'
-    AND policy_type_code = 'B'
-    AND policy_length = 12
-    AND insurer_code = 'LW';
-
-COMMIT;
-
-
-
---Comment out SET ECHO and SPOOL commands before submitting your portfolio
-SPOOL OFF
-SET ECHO OFF
+    'LAS'
+)
 Error report -
-ORA-06550: line 47, column 1:
-PLS-00103: Encountered the symbol "DECLARE" 
-06550. 00000 -  "line %s, column %s:\n%s"
-*Cause:    Usually a PL/SQL compilation error.
-*Action:
+ORA-00001: unique constraint (XZHO0118.POLICY_NO_UQ) violated
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> 
+SQL> /*Task 4*/
+SQL> 
+SQL> DELETE FROM policy
+  2  
+  3  WHERE
+  4          prop_no = 7145
+  5      AND policy_type_code = 'B'
+  6      AND policy_startdate = TO_DATE('2023-04-21', 'YYYY-MM-DD');
+
+1 row deleted.
+
+SQL> 
+SQL> DELETE FROM policy
+  2  WHERE
+  3          prop_no = 7145
+  4      AND policy_type_code = 'C'
+  5      AND policy_startdate = TO_DATE('2023-05-01', 'YYYY-MM-DD');
+
+0 rows deleted.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> --Comment out SET ECHO and SPOOL commands before submitting your portfolio
+SQL> SPOOL OFF

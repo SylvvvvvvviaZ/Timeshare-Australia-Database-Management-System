@@ -61,17 +61,6 @@ ALTER TABLE policy ADD CONSTRAINT insurer_policy
     
 /*Task 2*/
 
-DECLARE
-  v_policy_id_1 NUMBER;
-  v_policy_id_2 NUMBER;
-  
-BEGIN
-    SELECT policy_id_seq.NEXTVAL INTO v_policy_id_1 FROM DUAL;
-    SELECT policy_id_seq.NEXTVAL INTO v_policy_id_2 FROM DUAL;
-
---The policy_type_code 'B' indicates that this is a building insurance policy.       
---The insurer_code 'LW' indicates that this is  Ludovika Wiggins as an insurance company.
-
 INSERT INTO policy (
     policy_id,
     prop_no,
@@ -80,12 +69,12 @@ INSERT INTO policy (
     policy_length,
     insurer_code
 ) VALUES (
-    v_policy_id_1,
+    policy_id_seq.NEXTVAL,
     7145,
-    TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
+    TO_DATE('2023-04-21', 'YYYY-MM-DD'),
     'B',
     12,
-    'LW'
+    'LAS'
 );
 
 INSERT INTO policy (
@@ -96,44 +85,27 @@ INSERT INTO policy (
     policy_length,
     insurer_code
 ) VALUES (
-    v_policy_id_2,
+    policy_id_seq.NEXTVAL,
     9346,
-    TO_DATE('21-APR-2023', 'DD-MON-YYYY'),
+    TO_DATE('2023-04-21', 'YYYY-MM-DD'),
     'B',
     12,
-    'LW'
+    'LAS'
 );
 
 COMMIT;
 
-END;
        
 /*Task 3*/
 
-DECLARE
-    v_policy_id NUMBER;
-    
-BEGIN
-    SELECT
-        policy_id
-    INTO v_policy_id
-    FROM
-        policy
-    WHERE
-            prop_no = 7145
-        AND policy_startdate = TO_DATE('21-APR-2023', 'DD-MON-YYYY')
-
 UPDATE policy
-SET
-    policy_length = 18
-WHERE
-    policy_id = v_policy_id;
 
-SELECT
-    policy_id_seq.NEXTVAL
-INTO v_policy_id
-FROM
-    dual;
+SET
+    policy_length = policy_length + 6
+WHERE
+        prop_no = 7145
+    AND policy_type_code = 'B'
+    AND policy_startdate = TO_DATE('2023-04-21', 'YYYY-MM-DD');
 
 INSERT INTO policy (
     policy_id,
@@ -143,34 +115,13 @@ INSERT INTO policy (
     policy_length,
     insurer_code
 ) VALUES (
-    v_policy_id,
+    policy_id_seq.NEXTVAL,
     7145,
-    TO_DATE('01-MAY-2023', 'DD-MON-YYYY'),
+    TO_DATE('2023-05-01', 'YYYY-MM-DD'),
     'C',
     12,
-    'LAI'
+    'LAS'
 );
-
-COMMIT;
-
-end;
-        
--- Insert a new policy record
-INSERT
-    INTO policy (
-        policy_id,
-        prop_no,
-        policy_startdate,
-        policy_type_code,
-        policy_length,
-        insurer_code
-    )
-VALUES (3,
-           7145,
-           '01-MAY-23',
-           'B',
-           12,
-           'LW');
 
 COMMIT;
 
@@ -178,24 +129,19 @@ COMMIT;
 /*Task 4*/
 
 DELETE FROM policy
+
 WHERE
         prop_no = 7145
-    AND policy_startdate = DATE '2023-05-02'
     AND policy_type_code = 'B'
-    AND policy_length = 6
-    AND insurer_code = 'LW';
+    AND policy_startdate = TO_DATE('2023-04-21', 'YYYY-MM-DD');
 
 DELETE FROM policy
 WHERE
         prop_no = 7145
-    AND policy_startdate = DATE '2023-05-02'
-    AND policy_type_code = 'B'
-    AND policy_length = 12
-    AND insurer_code = 'LW';
+    AND policy_type_code = 'C'
+    AND policy_startdate = TO_DATE('2023-05-01', 'YYYY-MM-DD');
 
 COMMIT;
-
-
 
 --Comment out SET ECHO and SPOOL commands before submitting your portfolio
 SPOOL OFF
