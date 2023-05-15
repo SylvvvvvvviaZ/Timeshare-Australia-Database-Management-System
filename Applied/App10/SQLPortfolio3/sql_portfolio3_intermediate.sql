@@ -16,33 +16,73 @@ SPOOL sql_portfolio3_intermediate_output.txt
 -- ENSURE that your query is formatted and has a semicolon
 -- (;) at the end of this answer
 
+
+Select * 
+
+From rent.RENT ;
+
+Select * 
+
+From rent.TENANT ;
+
+Select * 
+
+From rent.DAMAGE ;
+
+
 SELECT
-    tenant_no,
-    COUNT(dam_no) AS num_damages,
-    CONCAT(tenant_title, '. ', tenant_givname, ' ', tenant_famname) AS tenant_name,
-    CONCAT('$', CAST(SUM(dam_cost) AS DECIMAL(6, 2))) AS total_cost
+    t.tenant_no,
+    t.tenant_title 
+    || '. ' 
+    || t.tenant_givname 
+    || ' ' 
+    || t.tenant_famname AS tenant_name,    
+    COUNT(D.dam_no) AS num_of_damages,
+    CONCAT('$', FORMAT(SUM(D.dam_cost), 2)) AS total_cost
 FROM
-    rent.TENANT t 
-    JOIN rent.DAMAGE d 
-    ON t.tenant_no = d.rent_agreement_no
+    rent.TENANT t
+    JOIN rent.RENT R ON t.tenant_no = R.tenant_no
+    JOIN rent.DAMAGE D ON R.rent_agreement_no = D.rent_agreement_no
 WHERE
-    to_char(d.dam_datetime, 'YYYY') = '2022'
+    to_char(dam_datetime, 'YYYY') = '2022'
 GROUP BY
-    tenant_no, 
+    t.tenant_no, 
     tenant_name
-HAVING
-    SUM(d.dam_cost) > 0
 ORDER BY
     total_cost DESC, 
-    tenant_no;
+    t.tenant_no ASC;
 
 /*2*/
 -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
 -- ENSURE that your query is formatted and has a semicolon
 -- (;) at the end of this answer
 
+SELECT
+    t.tenant_no,
+    t.tenant_title 
+    || '. ' 
+    || t.tenant_givname 
+    || ' ' 
+    || t.tenant_famname AS tenant_name,
+    r.prop_no,
+    p.prop_address,
+    COUNT(r.rent_agreement_no) AS num_rental_agreements
+FROM
+    rent.TENANT t
+    JOIN rent.RENT r ON t.tenant_no = r.tenant_no
+    JOIN rent.PROPERTY p ON r.prop_no = p.prop_no
+WHERE
+    p.prop_address = 'Tasmania'
+GROUP BY
+  t.tenant_no, tenant_name, r.prop_no, p.prop_address
+HAVING
+  COUNT(r.rent_agreement_no) > 1
+ORDER BY
+  t.tenant_no ASC;
+
+
 
 
 --Comment out SET ECHO and SPOOL commands before submitting your portfolio
-SPOOL OFF
-SET ECHO OFF
+-- SPOOL OFF
+-- SET ECHO OFF
