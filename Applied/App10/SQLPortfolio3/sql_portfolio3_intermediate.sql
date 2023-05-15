@@ -5,10 +5,10 @@ SPOOL sql_portfolio3_intermediate_output.txt
 --****PLEASE ENTER YOUR DETAILS BELOW****
 --sql_portfolio3_intermediate.sql
 
---Student ID:
---Student Name:
---Unit Code:
---Applied Class No:
+--Student ID: 33049246
+--Student Name: Xiaowen Zhou
+--Unit Code: FIT2094
+--Applied Class No: Applied 01, Melbourne Wed 18:00
 
 
 /*1*/
