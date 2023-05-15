@@ -1,0 +1,71 @@
+SQL> 
+SQL> --****PLEASE ENTER YOUR DETAILS BELOW****
+SQL> --sql_portfolio3_intermediate.sql
+SQL> 
+SQL> --Student ID: 33049246
+SQL> --Student Name: Xiaowen Zhou
+SQL> --Unit Code: FIT2094
+SQL> --Applied Class No: Applied 01, Melbourne Wed 18:00
+SQL> 
+SQL> 
+SQL> /*1*/
+SQL> -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
+SQL> -- ENSURE that your query is formatted and has a semicolon
+SQL> -- (;) at the end of this answer
+SQL> 
+SQL> SELECT
+  2      tenant_no,
+  3      COUNT(dam_no) AS num_damages,
+  4      CONCAT(tenant_title, '. ', tenant_givname, ' ', tenant_famname) AS tenant_name,
+  5      CONCAT('$', CAST(SUM(dam_cost) AS DECIMAL(6, 2))) AS total_cost
+  6  FROM
+  7      rent.TENANT t 
+  8      JOIN rent.DAMAGE d 
+  9      ON t.tenant_no = d.rent_agreement_no
+ 10  WHERE
+ 11      to_char(d.dam_datetime, 'YYYY') = '2022'
+ 12  GROUP BY
+ 13      tenant_no, 
+ 14      tenant_name
+ 15  HAVING
+ 16      SUM(d.dam_cost) > 0
+ 17  ORDER BY
+ 18      total_cost DESC, 
+ 19      tenant_no;
+
+Error starting at line : 19 in command -
+SELECT
+    tenant_no,
+    COUNT(dam_no) AS num_damages,
+    CONCAT(tenant_title, '. ', tenant_givname, ' ', tenant_famname) AS tenant_name,
+    CONCAT('$', CAST(SUM(dam_cost) AS DECIMAL(6, 2))) AS total_cost
+FROM
+    rent.TENANT t 
+    JOIN rent.DAMAGE d 
+    ON t.tenant_no = d.rent_agreement_no
+WHERE
+    to_char(d.dam_datetime, 'YYYY') = '2022'
+GROUP BY
+    tenant_no, 
+    tenant_name
+HAVING
+    SUM(d.dam_cost) > 0
+ORDER BY
+    total_cost DESC, 
+    tenant_no
+Error at Command Line : 22 Column : 5
+Error report -
+SQL Error: ORA-00909: invalid number of arguments
+00909. 00000 -  "invalid number of arguments"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*2*/
+SQL> -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
+SQL> -- ENSURE that your query is formatted and has a semicolon
+SQL> -- (;) at the end of this answer
+SQL> 
+SQL> 
+SQL> 
+SQL> --Comment out SET ECHO and SPOOL commands before submitting your portfolio
+SQL> SPOOL OFF
