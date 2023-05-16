@@ -14,143 +14,44 @@ SQL> -- ENSURE that your query is formatted and has a semicolon
 SQL> -- (;) at the end of this answer
 SQL> 
 SQL> 
-SQL> Select * 
-  2  
-  3  From rent.RENT ;
-
-RENT_AGREEMENT_NO RENT_LEAS RENT_WEEKLY_RATE  RENT_BOND RENT_LEASE_PERIOD    PROP_NO  TENANT_NO
------------------ --------- ---------------- ---------- ----------------- ---------- ----------
-                1 01/JAN/20              490       1960                 3       3197       8836
-                2 04/JAN/20              450       1800                 6       1984       1068
-                3 11/JAN/20              390       1560                 6       2022       1907
-                4 17/JAN/20              475       1900                 1       5990       7150
-                5 17/FEB/20              475       1900                12       5990       7150
-                6 26/FEB/20              435       1740                 6       2117       9147
-                7 01/APR/20              490       1960                 3       3197       8836
-                8 21/JUN/20              425       1700                12       1965       4971
-                9 01/JUL/20              490       1960                 6       3197       8836
-               10 04/JUL/20              450       1800                 6       1984       1068
-               11 07/JUL/20              530       2120                12       4001       7764
-
-RENT_AGREEMENT_NO RENT_LEAS RENT_WEEKLY_RATE  RENT_BOND RENT_LEASE_PERIOD    PROP_NO  TENANT_NO
------------------ --------- ---------------- ---------- ----------------- ---------- ----------
-               12 11/JUL/20              390       1560                 6       2022       1907
-               13 26/AUG/20              435       1740                 6       2117       9147
-               14 04/JAN/21              475       1900                 6       1984       1907
-               15 11/JAN/21              415       1660                 6       2022       1068
-               16 17/JAN/21              500       2000                12       5990       5518
-               17 26/FEB/21              440       1760                12       2117       9147
-               18 30/MAR/21              335       1340                 9       7145       7634
-               19 21/JUN/21              450       1800                12       1965       4971
-               20 07/JUL/21              550       2200                12       4001       7764
-               21 12/JAN/22              335       1340                 3       7145       1286
-               22 12/APR/22              335       1340                 3       7145       1286
-
-RENT_AGREEMENT_NO RENT_LEAS RENT_WEEKLY_RATE  RENT_BOND RENT_LEASE_PERIOD    PROP_NO  TENANT_NO
------------------ --------- ---------------- ---------- ----------------- ---------- ----------
-               23 14/APR/22              410       1640                 6       6123       2524
-               24 26/MAY/22              350       1400                 9       9346       2720
-               25 12/JUL/22              365       1340                 9       7145       1286
-               26 14/OCT/22              425       1640                12       6123       2524
-
-26 rows selected. 
-
+SQL> --Select * From rent.RENT ;
 SQL> 
-SQL> Select * 
-  2  
-  3  From rent.TENANT ;
-
- TENANT_NO TENAN TENANT_GIVNAME       TENANT_FAMNAME       TENANT_ADDRESS                                                                   TENANT_PHO
----------- ----- -------------------- -------------------- -------------------------------------------------------------------------------- ----------
-      1068 Mrs   Haily                Cuardall             536 Emma Meadow, Suite 340, 9498, Woodland, Tasmania                             0482780109
-      1907 Ms    Nadia                Jerred               30 Cox Street, Suite 036, 1100, Fadelland, Tasmania                              0428186025
-      9147 Mr    Melly                Jerger               9167 Heller Lane, Apt. 005, 3172, Alichester, Tasmania                           0420689760
-      4971 Mr    Gustie               Hugueville           4633 Leannon Crescent, Suite 962, 1791, Lake Evaside, Tasmania                   0412289398
-      7764 Ms    Irving               Legister             86 Lola Circuit, Apt. 822, 3342, Emmafurt, Australian Capital Territory          0484466523
-      8836 Mr    Robinson             Elderbrant           22 Benjamin Track, Suite 722, 8157, Koelpinmouth, Australian Capital Territory   0410599133
-      7150 Mrs   Aloin                Breakspear           7600 Wilson Trail, Suite 119, 0618, Reynoldsside, New South Wales                0425798264
-      5518 Mrs   Diane                De Bruyne            70 Thomson Boulevard, Suite 474, 3521, Campbellhaven, New South Wales            0461026221
-      2524 Mr    Rich                 Suggate              26 Hackett Knoll, Apt. 615, 6856, South Annashire, Victoria                      0465485729
-      2720 Ms    Patricia             Stroband             531 Sienna Run, Suite 991, 6792, Boscoburgh, Queensland                          0420531571
-      7634 Ms    Guenna               Walaron              3357 Georgia Station St, Suite 002, 9587, Lake Holly, Queensland                 0473698138
-
- TENANT_NO TENAN TENANT_GIVNAME       TENANT_FAMNAME       TENANT_ADDRESS                                                                   TENANT_PHO
----------- ----- -------------------- -------------------- -------------------------------------------------------------------------------- ----------
-      1286 Ms    Dacey                Demchen              928 Olivia Crest, Apt. 293, 4328, Connellymouth, Queensland                      0478713647
-
-12 rows selected. 
-
+SQL> --Select *  From rent.TENANT ;
 SQL> 
-SQL> Select * 
-  2  
-  3  From rent.DAMAGE ;
-
-    DAM_NO DAM_DATET DAM_TYPE                                             DAM_COST RENT_AGREEMENT_NO     PAY_NO
----------- --------- -------------------------------------------------- ---------- ----------------- ----------
-         1 11/JUN/20 TV in the bedroom is out of order                         425                 2         36
-         2 10/AUG/21 Broken small window in the bathroom                       250                17        126
-         3 15/SEP/21 The walls are stained with plasticine                     330                20        134
-         4 25/AUG/22 Washing machine is out of order                           500                23        182
-         5 17/MAY/22 Broken door handle                                        150                19           
-         6 01/SEP/22 Damaged carpeting                                         900                24           
-         7 01/OCT/22 Broken front door                                         750                24           
-         8 08/DEC/22 Hole on the front door                                    800                25           
-         9 08/DEC/22 Broken glass on the front windows                         850                25           
-
-9 rows selected. 
-
+SQL> --Select *  From rent.DAMAGE ;
 SQL> 
 SQL> 
 SQL> SELECT
   2      t.tenant_no,
-  3      t.tenant_title 
-  4      || '. ' 
-  5      || t.tenant_givname 
-  6      || ' ' 
-  7      || t.tenant_famname AS tenant_name,    
-  8      COUNT(D.dam_no) AS num_of_damages,
-  9      CONCAT('$', FORMAT(SUM(D.dam_cost), 2)) AS total_cost
+  3      t.tenant_title
+  4      || '. '
+  5      || t.tenant_givname
+  6      || ' '
+  7      || t.tenant_famname AS tenant_name,
+  8      COUNT(d.dam_no)     AS num_of_damages,
+  9      to_char(SUM(d.dam_cost), '$9990.99') AS total_cost
  10  FROM
- 11      rent.TENANT t
- 12      JOIN rent.RENT R ON t.tenant_no = R.tenant_no
- 13      JOIN rent.DAMAGE D ON R.rent_agreement_no = D.rent_agreement_no
+ 11           rent.tenant t
+ 12      JOIN rent.rent   r ON t.tenant_no = r.tenant_no
+ 13      JOIN rent.damage d ON r.rent_agreement_no = d.rent_agreement_no
  14  WHERE
  15      to_char(dam_datetime, 'YYYY') = '2022'
  16  GROUP BY
- 17      t.tenant_no, 
- 18      tenant_name
- 19  ORDER BY
- 20      total_cost DESC, 
- 21      t.tenant_no ASC;
+ 17      t.tenant_no,
+ 18      tenant_title,
+ 19      t.tenant_givname,
+ 20      t.tenant_famname
+ 21  ORDER BY
+ 22      total_cost DESC,
+ 23      t.tenant_no ASC;
 
-Error starting at line : 33 in command -
-SELECT
-    t.tenant_no,
-    t.tenant_title 
-    || '. ' 
-    || t.tenant_givname 
-    || ' ' 
-    || t.tenant_famname AS tenant_name,    
-    COUNT(D.dam_no) AS num_of_damages,
-    CONCAT('$', FORMAT(SUM(D.dam_cost), 2)) AS total_cost
-FROM
-    rent.TENANT t
-    JOIN rent.RENT R ON t.tenant_no = R.tenant_no
-    JOIN rent.DAMAGE D ON R.rent_agreement_no = D.rent_agreement_no
-WHERE
-    to_char(dam_datetime, 'YYYY') = '2022'
-GROUP BY
-    t.tenant_no, 
-    tenant_name
-ORDER BY
-    total_cost DESC, 
-    t.tenant_no ASC
-Error at Command Line : 50 Column : 5
-Error report -
-SQL Error: ORA-00904: "TENANT_NAME": invalid identifier
-00904. 00000 -  "%s: invalid identifier"
-*Cause:    
-*Action:
+ TENANT_NO TENANT_NAME                                      NUM_OF_DAMAGES TOTAL_COS
+---------- ------------------------------------------------ -------------- ---------
+      1286 Ms. Dacey Demchen                                             2  $1650.00
+      2720 Ms. Patricia Stroband                                         2  $1650.00
+      2524 Mr. Rich Suggate                                              1   $500.00
+      4971 Mr. Gustie Hugueville                                         1   $150.00
+
 SQL> 
 SQL> /*2*/
 SQL> -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
@@ -165,54 +66,28 @@ SQL> SELECT
   6      || ' ' 
   7      || t.tenant_famname AS tenant_name,
   8      r.prop_no,
-  9      p.prop_address,
- 10      COUNT(r.rent_agreement_no) AS num_rental_agreements
- 11  FROM
- 12      rent.TENANT t
- 13      JOIN rent.RENT r ON t.tenant_no = r.tenant_no
- 14      JOIN rent.PROPERTY p ON r.prop_no = p.prop_no
- 15  WHERE
- 16      p.prop_address = 'Tasmania'
- 17  GROUP BY
- 18    t.tenant_no, tenant_name, r.prop_no, p.prop_address
- 19  HAVING
- 20    COUNT(r.rent_agreement_no) > 1
- 21  ORDER BY
- 22    t.tenant_no ASC;
-
-Error starting at line : 60 in command -
-SELECT
-    t.tenant_no,
-    t.tenant_title 
-    || '. ' 
-    || t.tenant_givname 
-    || ' ' 
-    || t.tenant_famname AS tenant_name,
-    r.prop_no,
-    p.prop_address,
-    COUNT(r.rent_agreement_no) AS num_rental_agreements
-FROM
-    rent.TENANT t
-    JOIN rent.RENT r ON t.tenant_no = r.tenant_no
-    JOIN rent.PROPERTY p ON r.prop_no = p.prop_no
-WHERE
-    p.prop_address = 'Tasmania'
-GROUP BY
-  t.tenant_no, tenant_name, r.prop_no, p.prop_address
-HAVING
-  COUNT(r.rent_agreement_no) > 1
-ORDER BY
-  t.tenant_no ASC
-Error at Command Line : 77 Column : 16
-Error report -
-SQL Error: ORA-00904: "TENANT_NAME": invalid identifier
-00904. 00000 -  "%s: invalid identifier"
-*Cause:    
-*Action:
+  9      p.prop_address
+ 10  FROM
+ 11      rent.TENANT t
+ 12      JOIN rent.RENT r ON t.tenant_no = r.tenant_no
+ 13      JOIN rent.PROPERTY p ON r.prop_no = p.prop_no
+ 14  WHERE
+ 15      p.prop_address = 'Tasmania'
+ 16  GROUP BY
+ 17      t.tenant_no, 
+ 18      t.tenant_title,
+ 19      t.tenant_givname,
+ 20      t.tenant_famname, 
+ 21      r.prop_no, 
+ 22      p.prop_address
+ 23  HAVING
+ 24      COUNT(r.rent_agreement_no) > 1
+ 25  ORDER BY
+ 26      t.tenant_no ASC;
+no rows selected
 SQL> 
 SQL> 
 SQL> 
 SQL> 
 SQL> --Comment out SET ECHO and SPOOL commands before submitting your portfolio
-SQL> -- SPOOL OFF
-SQL> -- SET ECHO OFF
+SQL> SPOOL OFF
