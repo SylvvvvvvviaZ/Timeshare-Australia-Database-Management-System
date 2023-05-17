@@ -1,6 +1,6 @@
 --Comment out SET ECHO and SPOOL commands before submitting your portfolio
-SET ECHO ON
-SPOOL sql_portfolio3_intermediate_output.txt
+--SET ECHO ON
+--SPOOL sql_portfolio3_intermediate_output.txt
 
 --****PLEASE ENTER YOUR DETAILS BELOW****
 --sql_portfolio3_intermediate.sql
@@ -78,5 +78,5 @@ ORDER BY
     t.tenant_no;
     
 --Comment out SET ECHO and SPOOL commands before submitting your portfolio
-SPOOL OFF
-SET ECHO OFF
+--SPOOL OFF
+--SET ECHO OFF
