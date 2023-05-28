@@ -1,10 +1,10 @@
 --*****PLEASE ENTER YOUR DETAILS BELOW*****
 --T1-tsa-schema.sql
 
---Student ID:
---Student Name:
---Unit Code:
---Applied Class No:
+--Student ID: 33049246
+--Student Name: Xiaowen Zhou
+--Unit Code: FIT2094
+--Applied Class No: Applied 01, Melbourne Wed 18:00
 
 /* Comments for your marker:
 
@@ -18,12 +18,29 @@
 -- are included. FK constraints are to be added at the end of this script
 
 -- BOOKING
-
-
+CREATE TABLE booking(
+    booking_id                NUMERIC(8) NOT NULL,
+    resort_id                 NUMERIC(4) NOT NULL,
+    cabin_no                  NUMERIC(3) NOT NULL,
+    booking_from              DATE NOT NULL,
+    booking_to                DATE NOT NULL,
+    booking_noadults          NUMERIC(2) NOT NULL,
+    booking_nochildren        NUMERIC(2) NOT NULL,
+    booking_total_points_cost NUMERIC(4) NOT NULL,
+    member_id                 NUMERIC(6) NOT NULL,
+    staff_id                  NUMERIC(5) NOT NULL
+    );
 
 -- CABIN
-
-
+CREATE TABLE cabin (
+    resort_id               NUMERIC(4) NOT NULL,
+    cabin_no                NUMERIC(3) NOT NULL,
+    cabin_nobedrooms        NUMERIC(1) NOT NULL,
+    cabin_sleeping_capacity NUMERIC(2) NOT NULL,
+    cabin_bathroom_type     CHAR(1) NOT NULL,
+    cabin_points_cost_day   NUMERIC(4) NOT NULL,
+    cabin_description       VARCHAR2(250) NOT NULL
+);
 
 -- Add all missing FK Constraints below here
                         
