@@ -30,7 +30,36 @@ CREATE TABLE booking(
     member_id                 NUMERIC(6) NOT NULL,
     staff_id                  NUMERIC(5) NOT NULL
     );
+COMMENT ON COLUMN booking.booking_id IS
+    'surrogate key added to replace BOOKING composite PK';
 
+COMMENT ON COLUMN booking.resort_id IS
+    'Resort identifier, for this booking';
+
+COMMENT ON COLUMN booking.cabin_no IS
+    'Cabin number within the resort, for this booking';
+
+COMMENT ON COLUMN booking.booking_from IS
+    'Date booking from';
+
+COMMENT ON COLUMN booking.booking_to IS
+    'Date booking to';
+
+COMMENT ON COLUMN booking.booking_noadults IS
+    'Booking number of adults';
+
+COMMENT ON COLUMN booking.booking_nochildren IS
+    'Booking number of children';
+
+COMMENT ON COLUMN booking.booking_total_points_cost IS
+    'Total cost to the member in points for this booking';
+
+COMMENT ON COLUMN booking.member_id IS
+    'Unique member id across TSA for member who made this booking';
+
+COMMENT ON COLUMN booking.staff_id IS
+    'Staff identifier of staff member who took this booking';
+       
 -- CABIN
 CREATE TABLE cabin (
     resort_id               NUMERIC(4) NOT NULL,
@@ -42,6 +71,28 @@ CREATE TABLE cabin (
     cabin_description       VARCHAR2(250) NOT NULL
 );
 
+COMMENT ON COLUMN cabin.resort_id IS
+    'Resort identifier';
+
+COMMENT ON COLUMN cabin.cabin_no IS
+    'Cabin number within the resort';
+
+COMMENT ON COLUMN cabin.cabin_nobedrooms IS
+    'Number of bedrooms in cabin (between 1 and 4 bedrooms)';
+
+COMMENT ON COLUMN cabin.cabin_sleeping_capacity IS
+    'Cabin sleeping capacity';
+
+COMMENT ON COLUMN cabin.cabin_bathroom_type IS
+    'Type of cabin bathroom: I - Inside cabin bathroom / C - outside common bathroom'
+    ;
+
+COMMENT ON COLUMN cabin.cabin_points_cost_day IS
+    'Number of members points the cabin costs per day';
+
+COMMENT ON COLUMN cabin.cabin_description IS
+    'Cabin description';
+    
 -- Add all missing FK Constraints below here
                         
    
