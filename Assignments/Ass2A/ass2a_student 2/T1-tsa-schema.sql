@@ -8,9 +8,6 @@
 
 /* Comments for your marker:
 
-
-
-
 */
 
 -- Task 1 Add Create table statements for the white TABLES below
@@ -59,7 +56,13 @@ COMMENT ON COLUMN booking.member_id IS
 
 COMMENT ON COLUMN booking.staff_id IS
     'Staff identifier of staff member who took this booking';
-       
+    
+ALTER TABLE booking ADD CONSTRAINT booking_pk PRIMARY KEY ( booking_id );
+
+ALTER TABLE booking
+ADD CONSTRAINT booking_nk UNIQUE (resort_id, cabin_no, booking_from);
+
+   
 -- CABIN
 CREATE TABLE cabin (
     resort_id               NUMERIC(4) NOT NULL,
@@ -92,10 +95,28 @@ COMMENT ON COLUMN cabin.cabin_points_cost_day IS
 
 COMMENT ON COLUMN cabin.cabin_description IS
     'Cabin description';
-    
+
+ALTER TABLE cabin ADD CONSTRAINT cabin_pk PRIMARY KEY ( resort_id,
+                                                        cabin_no );
+                                                        
 -- Add all missing FK Constraints below here
-                        
-   
+ALTER TABLE booking
+    ADD CONSTRAINT member_booking FOREIGN KEY ( member_id )
+        REFERENCES member ( member_id );
+
+ALTER TABLE booking
+    ADD CONSTRAINT staff_booking FOREIGN KEY ( staff_id )
+        REFERENCES staff ( staff_id );
+
+ALTER TABLE booking
+    ADD CONSTRAINT cabin_booking FOREIGN KEY ( resort_id,
+                                               cabin_no )
+        REFERENCES cabin ( resort_id,
+                           cabin_no );
+
+ALTER TABLE cabin
+    ADD CONSTRAINT resort_cabin FOREIGN KEY ( resort_id )
+        REFERENCES resort ( resort_id );
 
 --**Trigger for checking and updating member.member_points for each booking.**--
 --**Run this code before attempting Task 2 and Task 3**--
