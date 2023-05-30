@@ -11,7 +11,7 @@
 */
 
 --4(a)
-ALTER TABLE cabin ADD booking_count NUMBER(8, 0) DEFAULT 0;
+ALTER TABLE cabin ADD booking_count NUMBER(3) DEFAULT 0;
 
 UPDATE cabin c
 SET
@@ -27,6 +27,7 @@ SET
 DESC cabin;
 
 SELECT
+    resort_id,
     cabin_no,
     booking_count
 FROM
