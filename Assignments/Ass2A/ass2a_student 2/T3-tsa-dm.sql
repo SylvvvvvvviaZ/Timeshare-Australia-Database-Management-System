@@ -56,6 +56,7 @@ INSERT
         220,
         'Description of the cabin: in Broome (latitude:-17.9644, longitude:122.2304)'
     );
+COMMIT;
 
 --3(c)
 INSERT INTO booking (
@@ -101,8 +102,36 @@ INSERT INTO booking (
 );
     
 --3(d)
-
-
-
-
+UPDATE booking
+SET
+    booking_to = TO_DATE('2023-05-29', 'YYYY-MM-DD'),
+    booking_total_points_cost = booking_total_points_cost + 220
+WHERE
+        member_id = (
+            SELECT
+                member_id
+            FROM
+                member
+            WHERE
+                    upper(member_gname) = upper('Noah')
+                AND upper(member_fname) = upper('Garrard')
+        )
+    AND booking_from = TO_DATE('2023-05-26', 'YYYY-MM-DD');
+COMMIT;    
 --3(e)
+
+-- Delete bookings for the cabin
+DELETE FROM booking
+WHERE cabin_no = 4;
+
+-- Delete the cabin
+DELETE FROM cabin
+WHERE cabin_no = 4
+AND resort_id = (
+    SELECT resort_id
+    FROM resort
+    WHERE upper(resort_name) = upper('Awesome Resort')
+    AND ROWNUM = 1
+);
+
+COMMIT;
