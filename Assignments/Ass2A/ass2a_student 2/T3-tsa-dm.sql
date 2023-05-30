@@ -100,7 +100,8 @@ INSERT INTO booking (
         WHERE staff_phone = '0493427245'
     )
 );
-    
+
+COMMIT;    
 --3(d)
 UPDATE booking
 SET

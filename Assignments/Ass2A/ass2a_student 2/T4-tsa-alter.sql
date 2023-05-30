@@ -11,6 +11,7 @@
 */
 
 --4(a)
+
 ALTER TABLE cabin ADD booking_count NUMBER(3) DEFAULT 0;
 
 UPDATE cabin c
