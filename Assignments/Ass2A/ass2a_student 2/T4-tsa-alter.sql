@@ -12,8 +12,11 @@
 
 --4(a)
 
+-- Update the CABIN table structure 
+-- Include the new column booking_count indicating how may times the cabin has been booked
 ALTER TABLE cabin ADD booking_count NUMBER(3) DEFAULT 0;
 
+-- Count booking_count 
 UPDATE cabin c
 SET
     booking_count = (
@@ -24,9 +27,11 @@ SET
         WHERE
             b.cabin_no = c.cabin_no
     );
+    
 -- Show the updated structure of the cabin table
 DESC cabin;
 
+-- Show the booking_count in the cabin table
 SELECT
     resort_id,
     cabin_no,
@@ -35,6 +40,8 @@ FROM
     cabin;
 
 --4(b)
+
+-- Create a new table staff_role
 
 DROP TABLE staff_role CASCADE CONSTRAINTS PURGE;
 
@@ -54,6 +61,8 @@ COMMENT ON COLUMN staff_role.job_description IS
     'Description of the job responsibilities for the staff role';
 
 ALTER TABLE staff_role ADD CONSTRAINT staff_role_pk PRIMARY KEY ( role_id );
+
+-- Insert data that TSA would like to record
 
 INSERT INTO staff_role (
     role_id,
@@ -85,8 +94,10 @@ INSERT INTO staff_role (
     'Prepare and present marketing ideas and deliverables '
 );
 
+-- Add the role_id column in the staff table
 ALTER TABLE staff ADD role_id CHAR(1);
 
+-- Initialise the role for all staff as Admin staff
 UPDATE staff
 SET
     role_id = 'A';
@@ -98,9 +109,8 @@ ALTER TABLE staff
 -- Show the updated structure of the staff table
 DESC staff;
 
--- Show the newly created staff_role table
+-- Show the newly created staff_role table that each staff members has their own assigned roles
 DESC staff_role;
-
 
 SELECT
     staff_id,
@@ -114,6 +124,9 @@ FROM
     ON staff.role_id = staff_role.role_id;
     
 --4(c)
+
+-- Create a new table cleaning_schedule
+
 DROP TABLE cleaning_schedule CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE cleaning_schedule (
@@ -163,6 +176,7 @@ ALTER TABLE cleaning_schedule
 
 ALTER TABLE cabin ADD cleaning_status CHAR(1) DEFAULT 'N' NOT NULL;
 
+-- Show the updated structure of the cleaning_schedule and cabin table
 DESC cleaning_schedule;
 
 DESC cabin;
