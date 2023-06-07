@@ -67,7 +67,7 @@ SELECT
     COUNT(m2.member_id) AS number_of_recommendations
 FROM
     tsa.member m
-    LEFT JOIN tsa.member m2
+    LEFT OUTER JOIN tsa.member m2
     ON m.member_id = m2.member_id_recby
     JOIN tsa.resort r
     ON m.resort_id = r.resort_id
@@ -111,7 +111,7 @@ SELECT
     END AS avg_rating
 FROM
     tsa.point_of_interest p
-    LEFT JOIN tsa.review  r
+    LEFT OUTER JOIN tsa.review  r
     ON p.poi_id = r.poi_id
 GROUP BY
     p.poi_id,
@@ -124,6 +124,33 @@ ORDER BY
 -- ENSURE that your query is formatted and has a semicolon
 -- (;) at the end of this answer
 
+SELECT
+    poi.poi_name,
+    pt.poi_type_descr,
+    t.town_name,
+    'Lat: ' || TO_CHAR(t.town_lat) || 
+    ' Long: ' || TO_CHAR(t.town_long) AS town_location,
+    (SELECT COUNT(*) FROM tsa.REVIEW WHERE REVIEW.poi_id = poi.poi_id) AS reviews_completed,
+    CASE
+        WHEN (SELECT COUNT(*) FROM tsa.REVIEW WHERE tsa.REVIEW.poi_id = tsa.poi.poi_id) > 0 
+        THEN
+            TO_CHAR(
+                ((SELECT COUNT(*) FROM tsa.REVIEW WHERE tsa.REVIEW.poi_id = tsa.poi.poi_id) 
+                / (SELECT COUNT(*) FROM tsa.REVIEW) * 100), 'FM990.99'
+            ) || ' %'
+        ELSE
+            'No reviews completed'
+    END AS percent_of_reviews
+FROM
+        tsa.point_of_interest poi
+    JOIN tsa.poi_type pt 
+    ON poi.poi_type_id = pt.poi_type_id
+    JOIN tsa.town t 
+    ON poi.town_id = t.town_id
+ORDER BY
+    t.town_name,
+    (SELECT COUNT(*) FROM tsa.REVIEW WHERE tsa.REVIEW.poi_id = tsa.poi.poi_id) DESC,
+    poi.poi_name;
 
 /*2(e)*/
 -- PLEASE PLACE REQUIRED SQL STATEMENT FOR THIS PART HERE
