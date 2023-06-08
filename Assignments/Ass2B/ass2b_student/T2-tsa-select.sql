@@ -157,6 +157,44 @@ ORDER BY
 -- ENSURE that your query is formatted and has a semicolon
 -- (;) at the end of this answer
 
+SELECT
+    m.resort_id AS resort_id,
+    r.resort_name AS resort_name,
+    m.member_no AS member_no,
+    m.member_gname || ' ' || m.member_fname AS member_name,
+    TO_CHAR(m.member_date_joined, 'DD-MM-YYYY') AS date_joined,
+    rec.member_no || ' ' || rec.member_gname || ' ' || rec.member_fname AS recommended_by_details,
+    LPAD('$' || TO_CHAR(ROUND(SUM(mc.mc_total), 0)), 13, ' ') AS total_charges
+FROM
+    tsa.member m
+    INNER JOIN tsa.resort r ON m.resort_id = r.resort_id
+    INNER JOIN tsa.town t ON r.town_id = t.town_id
+    INNER JOIN tsa.member rec ON m.member_id_recby = rec.member_id
+    INNER JOIN tsa.member_charge mc ON m.member_id = mc.member_id
+WHERE
+    NOT (t.town_name = 'Byron Bay' AND t.town_state = 'NSW')
+GROUP BY
+    m.resort_id,
+    r.resort_name,
+    m.member_no,
+    m.member_gname,
+    m.member_fname,
+    m.member_date_joined,
+    rec.member_no,
+    rec.member_gname,
+    rec.member_fname
+HAVING
+    SUM(mc.mc_total) < (
+        SELECT
+            AVG(sub_mc.mc_total)
+        FROM
+            tsa.member_charge sub_mc
+            JOIN tsa.member sub_m ON sub_mc.member_id = sub_m.member_id
+    )
+ORDER BY
+    m.resort_id,
+    m.member_no;
+
 
 
 /*2(f)*/
