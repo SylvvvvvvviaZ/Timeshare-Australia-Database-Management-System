@@ -167,10 +167,14 @@ SELECT
     LPAD('$' || TO_CHAR(ROUND(SUM(mc.mc_total), 0)), 13, ' ') AS total_charges
 FROM
     tsa.member m 
-    JOIN tsa.resort r ON m.resort_id = r.resort_id
-    JOIN tsa.town t ON r.town_id = t.town_id
-    JOIN tsa.member rec ON m.member_id_recby = rec.member_id
-    JOIN tsa.member_charge mc ON m.member_id = mc.member_id
+    JOIN tsa.resort r 
+    ON m.resort_id = r.resort_id
+    JOIN tsa.town t 
+    ON r.town_id = t.town_id
+    JOIN tsa.member rec 
+    ON m.member_id_recby = rec.member_id
+    JOIN tsa.member_charge mc 
+    ON m.member_id = mc.member_id
 WHERE
     NOT (t.town_name = 'Byron Bay' AND t.town_state = 'NSW')
 GROUP BY
@@ -215,17 +219,14 @@ SELECT
     t.town_name AS poi_town,
     t.town_state AS poi_state,
     NVL(TO_CHAR(poi.poi_open_time, 'HH12:MIAM'), 'Not Applicable') AS poi_opening_time,
-    TO_NUMBER(geodistance(t.town_lat, t.town_long, tr.town_lat, tr.town_long), '999.9') AS DISTANCE
+    ROUND(geodistance(t.town_lat, t.town_long, tr.town_lat, tr.town_long), 1) AS DISTANCE
 FROM
     tsa.RESORT r
-JOIN
-    tsa.TOWN tr
+    JOIN tsa.TOWN tr
     ON r.town_id = tr.town_id
-JOIN
-    tsa.POINT_OF_INTEREST poi
+    JOIN tsa.POINT_OF_INTEREST poi
     ON poi.town_id = tr.town_id
-JOIN
-    tsa.TOWN t
+    JOIN tsa.TOWN t
     ON poi.town_id = t.town_id
 WHERE
     geodistance(t.town_lat, t.town_long, tr.town_lat, tr.town_long) <= 100
